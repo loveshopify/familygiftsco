@@ -1,0 +1,109 @@
+{% assign menus_with_images = 'bags,accessories,collections' | split: ',' %}
+
+{% comment %}
+  Links are passed to this include
+{% endcomment %}
+{% for link in links %}
+
+  {% if link.links != blank %}
+    {% assign submenu_active = false %}
+    {%- assign level1_slug = link.title | handle -%}
+    {% for childlink in link.links %}
+      {%- comment %}<locksmith:d821>{% endcomment -%}
+        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: childlink, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+      {%- comment %}</locksmith:d821>{% endcomment -%}
+      {% if childlink.active %}
+        {% assign submenu_active = true %}
+      {% endif %}
+    {% endfor %}
+    <div class="Nav__item Nav__item--main level-1 menu-item has-submenu {% if link.active or submenu_active %} Nav__item--active{% endif %}" aria-haspopup="true">
+      <a href="{{ link.url }}" class="Nav__link level-1 {% if link.url == '#' %}anchor-link{% endif %}">
+        <span>{{ link.title }}</span>
+      </a>
+      <div class="Nav__submenu level-2" data-identifier="{{ link.title | handle }}">
+        <div class="inner">
+         <div class="Nav level-2">
+            {% for link in link.links %}
+              {%- comment %}<locksmith:924f>{% endcomment -%}
+                {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+              {%- comment %}</locksmith:924f>{% endcomment -%}
+              {%- assign level2_slug = link.title | handle -%}
+              <div class="Nav__item level-2 {% if link.active %}is-active{% endif %}">
+                <a href="{{ link.url }}" class="Nav__link level-2">
+                  {% if level1_slug == 'accessories' or level1_slug == 'collections' %}
+                    {% capture img_ref %}{{ level1_slug }}_{{ level2_slug }}.jpg{% endcapture %}
+                    <figure>
+                      <img src="{{ img_ref | file_img_url: '300x' }}" alt="{{ link.title }}" loading="lazy">
+                    </figure>
+                  {% endif %}
+                  <span>{{ link.title | escape }}</span>
+                </a>
+                {% if link.links != blank %}
+                  <div class="Nav__submenu level-3" data-identifier="{{ link.title | handle }}">
+                    {% for link in link.links %}
+                      {%- comment %}<locksmith:4143>{% endcomment -%}
+                        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                      {%- comment %}</locksmith:4143>{% endcomment -%}
+                      {%- assign level3_slug = link.title | handle -%}
+                      {% if menus_with_images contains level1_slug %}
+                        {% capture img_ref %}{{ level1_slug }}_{{ level2_slug }}_{{ level3_slug }}.jpg{% endcapture %}
+                      {% endif %}
+                      <div class="Nav__item level-3">
+                        <a href="{{ link.url }}" class="Nav__link level-3">
+                          {% if menus_with_images contains level1_slug %}
+                            <figure>
+                              <img src="{{ img_ref | file_img_url: '300x' }}" alt="{{ link.title }}" loading="lazy">
+                            </figure>
+                          {% endif %}
+                          <span>{{ link.title }}</span>
+                        </a>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          {% for block in section.blocks %}
+            {% if block.type == 'menu-tout' %}
+               {% if link.title == block.settings.menu_item %}
+                  <div class="toute">
+                    <div class="Card" data-layout="vertical media-content">
+                      <div class="Card__media">
+                        {%- assign image = block.settings.image -%}
+                        <a href="/collections/hot-sellers">
+                          <img
+                            data-src="{{ image | img_url: '200x' }}"
+                            data-srcset="
+                              {{ image | img_url: '400x' }} 400w,
+                              {{ image | img_url: '1200x' }} 1200w,
+                              {{ image | img_url: '1600x' }} 1600w,
+                              {{ image | img_url: '2200x' }} 2200w
+                            "
+                            width="{{ image.width }}"
+                            height="{{ image.height }}"
+                            alt="{{ section.settings.title }}"
+                            class="u-show--fromDesktop lazyload"
+                          >
+                        </a>
+                      </div>
+                      <div class="Card__details">
+                        <h4>Best Sellers</h4>
+                        <div class="Card__cta">
+                          <a href="/collections/hot-sellers">Shop Best Sellers</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="Nav__item Nav__item--main {% if link.active %}selected{% endif %}">
+      <a href="{{ link.url }}" class="Nav__link--main Nav__link level-1">{{ link.title }}</a>
+    </div>
+  {% endif %}
+{% endfor %}

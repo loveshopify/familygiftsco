@@ -1,0 +1,75 @@
+<div class="Container" data-component="Highlight">
+  <div class="Card" data-layout="horizontal content-media">
+    <div class="Card__content">
+      <h3>{{ section.settings.title }}</h3>
+      {{ section.settings.description }}
+      {% if section.settings.button_link != blank %}
+        <div class="Buttons">
+          <a href="{{ section.settings.button_link }}" class="Button" data-style="dark outline">{{ section.settings.button_label }}</a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="Card__media">
+      {%- if section.settings.image != blank -%}
+        <figure>
+          <img
+            data-src="{{ section.settings.image | img_url: '400x' }}"
+            data-srcset="
+              {{ section.settings.image | img_url: '400x' }} 400w,
+              {{ section.settings.image | img_url: '800x' }} 800w,
+              {{ section.settings.image | img_url: '1600x' }} 1600w"
+            data-sizes="auto"
+            class="lazyload fadeup"
+            />
+        </figure>
+        <div class="deco01"></div>
+        <div class="deco02"></div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Highlight",
+  "class": "Highlight",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Highlight",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

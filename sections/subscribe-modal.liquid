@@ -1,0 +1,63 @@
+{%- assign desktopImage = section.settings.desktop_image -%}
+{%- assign mobileImage = section.settings.mobile_image | default: section.settings.desktop_image -%}
+
+<div data-component="SubscribeModal" class="wrapper">
+  <div class="SubscribeModal__modal">
+
+      <div class="inner">
+        <h6>{{ section.settings.intro }}</h6>
+        <div class="klaviyo-form-Wbpmk9" id="SubscribeModal"></div>
+      </div>
+      <img
+        data-src="{{ mobileImage | img_url: '200x' }}"
+        data-srcset="
+          {{ mobileImage | img_url: '200x' }} 200w,
+          {{ mobileImage | img_url: '400x' }} 400w,
+          {{ mobileImage | img_url: '800x' }} 800w
+        "
+        width="{{ mobileImage.width }}"
+        height="{{ mobileImage.height }}"
+        class="u-show--untilDesktop lazyload">
+      <img
+        data-src="{{ desktopImage | img_url: '200x' }}"
+        data-srcset="
+          {{ desktopImage | img_url: '200x' }} 200w,
+          {{ desktopImage | img_url: '400x' }} 400w,
+          {{ desktopImage | img_url: '800x' }} 800w,
+          {{ desktopImage | img_url: '1600x' }} 1600w
+        "
+        width="{{ desktopImage.width }}"
+        height="{{ desktopImage.height }}"
+        class="u-show--fromDesktop lazyload">
+      <button class="Button close-modal">
+        <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+          <use href='#close'></use>
+        </svg>
+      </button>
+  </div>
+  <div class="SubscribeModal__backdrop"></div>
+</div>
+
+{% schema %}
+{
+  "name": "Subscribe Modal",
+  "class": "SubscribeModal",
+  "settings": [
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro"
+    },
+    {
+      "label": "Image for Mobile",
+      "id": "mobile_image",
+      "type": "image_picker"
+    },
+    {
+      "label": "Image for Desktop",
+      "id": "desktop_image",
+      "type": "image_picker"
+    }
+  ]
+}
+{% endschema %}

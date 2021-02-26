@@ -1,0 +1,3 @@
+.Loop--faqs{display:block}.Entry--faq{padding-top:1.3em;padding-bottom:1.3em;border-bottom:1px solid var(--color-muted-lines)}.Entry--faq .inner{padding-right:4rem}.Collapse{overflow:hidden;position:relative}.Collapse__content{height:0;overflow:hidden;position:relative}.Collapse__content .inner{padding-top:1rem}.Collapse__toggle{cursor:pointer;margin:0;font-weight:500;position:relative;padding-right:2rem}.Collapse__toggle .icon{transition:all 260ms ease;position:absolute;top:50%;transform:translateY(-50%);right:0}.is-open .Collapse__toggle .icon.open{visibility:hidden}.is-open .Collapse__toggle .icon.close{visibility:visible}
+
+/*# sourceMappingURL=ui-Collapse.242b6a745322eb268897.css.map*/

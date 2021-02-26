@@ -1,0 +1,17 @@
+{% if total_saving %}
+  {% assign x = total_saving | plus: 0  %}
+  {% assign y = x | plus: cart.total_price | plus: 0  %}
+  {% assign sale = total_saving | times: 100.0  %}
+  {% assign sale = sale | divided_by:  y | round %}
+{% endif %}
+
+<div class="cart-resume">
+  <div
+    class="summary"
+    data-component="CartTotal"
+    data-initialValue="{{ cart.total_price }}"
+    data-originalValue="{{ original_value }}"
+    data-initialDiscount="{{ sale }}"
+  ></div>
+  <button type="submit" class="Button" data-style="solid red" data-layout="big" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+</div>

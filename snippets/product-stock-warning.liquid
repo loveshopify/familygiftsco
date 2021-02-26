@@ -1,0 +1,6 @@
+{% unless section.settings.show_quantity_selector and section.settings.enable_payment_button %}
+  {% if section.settings.enable_progressbar_text  or  section.settings.enable_timer_top_message %}
+    {% comment %} {% include 'product-features-progressbar' %} {% endcomment %}
+    <div data-component="StockLeft" data-product-id="{{ product.id }}"></div>
+  {% endif %}
+{% endunless %}

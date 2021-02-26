@@ -1,0 +1,65 @@
+{%- comment -%} name this file `link-list-json` and include with {%- include 'link-list-json' with linklists.link-list-handle -%}{%- endcomment -%}
+{"{{link-list-json.handle}}" : {
+  "title" : {{link-list-json.title | json }},
+  "links" : [
+    {%- comment %}<locksmith:0367>{% endcomment -%}
+      {%- assign locksmith_30ba_forloop__size = 0 %}{%- for link in link-list-json.links -%}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_30ba_forloop__size = locksmith_30ba_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_30ba_forloop__index = nil -%}
+    {%- comment %}</locksmith:0367>{% endcomment -%}
+    {%- for link in link-list-json.links -%}
+      {%- comment %}<locksmith:9317>{% endcomment -%}
+        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: link-list-json, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_30ba_forloop__index == nil %}{% assign locksmith_30ba_forloop__index = 1 %}{% assign locksmith_30ba_forloop__index0 = 0 %}{% else %}{% assign locksmith_30ba_forloop__index = locksmith_30ba_forloop__index | plus: 1 %}{% assign locksmith_30ba_forloop__index0 = locksmith_30ba_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_30ba_forloop__index == 1 %}{% assign locksmith_30ba_forloop__first = true %}{% else %}{% assign locksmith_30ba_forloop__first = false %}{% endif %}{% if locksmith_30ba_forloop__index == locksmith_30ba_forloop__size %}{% assign locksmith_30ba_forloop__last = true %}{% else %}{% assign locksmith_30ba_forloop__last = false %}{% endif %}{% assign locksmith_30ba_forloop__rindex = locksmith_30ba_forloop__size | minus: locksmith_30ba_forloop__index | minus: 1 %}{% assign locksmith_30ba_forloop__rindex0 = locksmith_30ba_forloop__size | minus: locksmith_30ba_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+      {%- comment %}</locksmith:9317>{% endcomment -%}
+      {
+        "type": {{ link.type | json }},
+        "current": {{ link.current | json }},
+        "child_current": {{ link.child_current | json }},
+        "active": {{ link.active | json }},
+        "child_active": {{ link.child_active | json }},
+        "levels": {{ link.levels | json }},
+        "object_handle": {{ link.object.handle | json }},
+        "url" : {{ link.url | json }},
+        "title" : {{ link.title | json }}
+        {%- if link.levels > 0 -%},
+          "links":[
+              {%- for sublink in link.links -%}
+                {%- comment %}<locksmith:9c30>{% endcomment -%}
+                  {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: sublink, subject_parent: link, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:9c30>{% endcomment -%}
+                {
+                  "type": {{ sublink.type | json }},
+                  "current": {{ sublink.current | json }},
+                  "child_current": {{ sublink.child_current | json }},
+                  "active": {{ sublink.active | json }},
+                  "child_active": {{ sublink.child_active | json }},
+                  "levels": {{ sublink.levels | json }},
+                  "object_handle": {{ sublink.object.handle | json }},
+                  "url" : {{ sublink.url | json }},
+                  "title" : {{ sublink.title | json }}
+                  {%- if sublink.levels > 0 -%},
+                    "links":[
+                        {%- for subsublink in sublink.links -%}
+                          {%- comment %}<locksmith:b348>{% endcomment -%}
+                            {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: subsublink, subject_parent: sublink, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                          {%- comment %}</locksmith:b348>{% endcomment -%}
+                          {
+                            "type": {{subsublink.type | json }},
+                            "current": {{subsublink.current | json }},
+                            "child_current": {{subsublink.child_current | json }},
+                            "active": {{subsublink.active | json }},
+                            "child_active": {{subsublink.child_active | json }},
+                            "levels": {{subsublink.levels | json }},
+                            "object_handle": {{subsublink.object.handle | json }},
+                            "url" : {{ subsublink.url | json }},
+                            "title" : {{ subsublink.title | json }}
+                          }{%- unless locksmith_30ba_forloop__last -%},{%- endunless -%}
+                        {%- endfor -%}
+                      ]
+                  {%- endif -%}
+                }{%- unless locksmith_30ba_forloop__last -%},{%- endunless -%}
+              {%- endfor -%}
+            ]
+        {%- endif -%}
+     }{%- unless locksmith_30ba_forloop__last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}}

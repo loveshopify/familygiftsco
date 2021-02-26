@@ -1,0 +1,38 @@
+{% for option in product.options_with_values %}
+  {%- capture params -%}
+      {
+        "index": {{forloop.index0 }},
+        "selected": {{ option.selected_value | json | escape }}
+      }
+    {%- endcapture -%}
+    <div
+      data-component="ProductSelector"
+      class="selector-wrapper js Product__form__unit Product__form__option option-{{ forloop.index }}"
+      data-product-variant-selector-ui>
+
+      <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+        {{ option.name }}
+      </label>
+      
+      {% comment %} Wrapper For Custom Dropdown {% endcomment %}
+      <div
+        class="component-wrapper"
+        data-params='{{ params }}'
+        data-options='{{ option.values | json | escape }}'></div>
+
+      {% comment %} Original Select Hidden {% endcomment %}
+      <select
+        class="u-hidden"
+        id="SingleOptionSelector-{{ forloop.index0 }}"
+        data-single-option-selector
+        data-index="option{{ option.position }}">
+        {% for value in option.values %}
+          <option
+            value="{{ value | escape }}"
+            {% if option.selected_value == value %}selected="selected"{% endif %}>
+              {{ value }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+{% endfor %}

@@ -1,0 +1,540 @@
+{% assign on_sale = false %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% if product.compare_at_price > product.price %}
+	{% assign on_sale = true %}
+{% endif %}
+
+{% include 'customily-sources' %}
+<div class="Main__content Product__main">
+  {% include 'product-gallery' %}
+  <div class="Product__details">
+    <div class="inner">
+      {%- assign titleParts = product.title | split: 'NO.' -%}
+      {%- assign mainTitle = product.title | split: 'NO.' | first -%}
+      {%- assign prodRef = product.title | split: 'NO.' | last -%}
+      {%- assign baseTitle = mainTitle | split: ' - ' | first -%}
+      {%- assign productColor = mainTitle | split: ' - ' | last -%}
+
+      {% render 'nav-breadcrumbs' %}
+      <h1 class="Product__title">{{ product.title }}</h1>
+
+      {% if product.metafields.loox.num_reviews %}
+        <a href="#looxReviews"><div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div></a>
+      {% else %}
+        <a href="#looxReviews"><div class="loox-rating" data-id="{{ product.id }}" data-rating="4.8" data-raters=""></div></a>
+      {% endif %}
+
+      {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-component: 'ProductForm' %}
+
+        <div class="price-discount-holder">
+          {% render 'product-price', product: product %}
+
+          {% if on_sale %}
+            {% render 'product-discount' product: product %}
+          {% endif %}
+        </div>
+
+
+        <div class="Form__grid" data-component="ProductOptions">
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+
+              {% assign optionIndex = forloop.index %}
+              <div class="js-enabled selector-wrapper Form__input">
+
+                <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                {{ option.name }}
+                </label>
+
+                {% if option.name contains 'Fabric' %}
+                    {% assign buttonStyle = 'swatch' %}
+                {% else %}
+                    {% assign buttonStyle = 'swatch_and_label' %}
+                {% endif %}
+
+                <div class="product-option">
+                  {% for value in option.values %}
+                    <label tabindex="0">
+                      <input type="radio"
+                        value="{{ value | escape }}"
+                        data-single-option-selector
+                        data-index="option{{ option.position }}"
+                        id="option-{{ optionIndex }}_{{ forloop.index }}"
+                        name="options[{{ option.name | escape }}]"
+                        {% if option.selected_value == value %}checked{% endif %}>
+                      <span class="input__label">{{ value }}</span>
+                    </label>
+                  {% endfor %}
+                </div>
+
+              </div>
+
+            {% endfor %}
+
+          {% endunless %}
+          {% comment %}
+            In order for this form to submit, it needs to contain an input with name="id".
+            ProductForm() will automatically create this input (or make sure it has the
+            right value set if it already exists) on form submit based on the
+            currently selected variant. However, if JS is disabled we need a fallback.
+
+            Include a single <select> element which allows users to select all variants
+            as a fallback and present it only when JS is disabled. In addition,
+            make sure you hide the option inputs declared above, like we do with the
+            `.js-enabled` class which only shows its contents when JS is enabled.
+          {% endcomment %}
+          <noscript>
+            <select name="id">
+              {% for variant in product.variants %}
+                <option
+                  {% if variant == current_variant %}selected="selected"{% endif %}
+                  {% unless variant.available %}disabled="disabled"{% endunless %}
+                  value="{{ variant.id }}">
+                    {{ variant.title }}
+                </option>
+              {% endfor %}
+            </select>
+          </noscript>
+
+          {% comment %}
+            Any input with `name="quantity"` will be picked up by ProductForm and
+            registered as a quantity input. If a quantity input is not included, a
+            default quantity of 1 is assumed.
+          {% endcomment %}
+          <div class="Form__input" data-size="col1-2">
+            <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1">
+          </div>
+
+        </div>
+
+        {% comment %}
+          Line Item property inputs with `name="properties[NAME]"` will be picked up
+          by ProductForm and registered as a properties input.
+        {% endcomment %}
+        {% comment %} <label for="Details">{{ 'products.product.details' | t }}</label>
+        <textarea id="Details" name="properties[Details]"></textarea> {% endcomment %}
+        {% include 'product-customizer' %}
+
+        {%- comment -%}
+          Adding customily options
+        {%- endcomment -%}
+        {% include 'customily-options' %}
+        {% include 'product-features' %}
+
+        <div class="add-to-cart-wrapper">
+          <button
+            type="submit"
+            class="Button"
+            data-style="solid red"
+            data-layout="big block"
+            {% unless current_variant.available %}disabled="disabled"{% endunless %}
+            >
+              Add to Cart
+          </button>
+          {% include 'product-stock-warning' %}
+        </div>
+
+        {% comment %}
+          Don't forget about the Dynamic Checkout buttons!
+          https://help.shopify.com/en/themes/customization/store/dynamic-checkout-buttons
+          NOTE: Hidden due to incompatibility with Customizely
+        {% endcomment %}
+        {% comment %} {{ form | payment_button }} {% endcomment %}
+
+        <div class="shipping-countdown">
+          <div class="icon-wrapper">
+            <svg viewBox='0 0 40 20' class='icon'>
+              <use href='#shipping'></use>
+            </svg>
+          </div>
+          {% comment %} <p>Order in the next <strong>21 hours and 30 minutes</strong> and have it delivered between Sept. 23–Sept. 25</p> {% endcomment %}
+          {% comment %} TODO: Reconfigure DELM after launch {% endcomment %}
+          <div class="product-single__description"></div>
+        </div>
+
+      {% endform %}
+
+      <h6>Description</h6>
+      {{ product.description }}
+
+      <section class="Section Section--qualityHighlights">
+        <div class="Section__content Container">
+          {% render 'quality-highlights' %}
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Product page",
+    "settings": [
+	  {
+        "type": "header",
+        "content": "Product page [NEED HELP?](https:\/\/help.boostertheme.com\/hc\/en-us\/articles\/360003047493-How-to-setup-the-product-page-)"
+      },
+  	  {
+        "type": "select",
+        "id": "buy_it_now_action",
+        "label": "Buy it Now Action",
+        "default": "direct_to_cart",
+          "options": [
+          {
+            "value": "thank_you_message",
+            "label": "Added To Cart Message"
+          },
+		  {
+            "value": "direct_to_checkout",
+            "label": "Direct to Checkout"
+          },
+		  {
+            "value": "direct_to_cart",
+            "label": "Direct to Cart"
+          }
+        ]
+      },
+      {
+		"type": "checkbox",
+      	"id": "show_saved_amount",
+      	"label": "Show Saved %",
+      	"default": true
+      },
+	  {
+        "type": "checkbox",
+        "id": "enable_default_variant",
+        "label": "Enable Make a Selection Option"
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_quantity_selector",
+        "label": "Show Quantity",
+        "default": false
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show Vendor",
+        "default": false
+	  },
+      {
+        "type": "checkbox",
+        "id": "enable_zoom",
+        "label": "Enable image zoom",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "shake_effect_enable",
+        "label": "Enable the shaking add to cart button",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "readmore_enable",
+        "label": "Enable Read more button",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_progressbar_text",
+        "label": "Enable Progress Bar",
+        "default": true
+      },
+	  {
+        "type": "checkbox",
+        "id": "enable_timer_top_message",
+        "label": "Enable Stock Left Message",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_progressbartimer_text",
+        "label": "Enable Sale end message",
+        "default": true
+      },
+  	  {
+        "type": "checkbox",
+        "id": "enable_shipping",
+        "label": "Enable Free + Shipping",
+        "default": false
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_tags",
+		"label": "Show tags",
+        "default": false
+  	  },
+	  {
+        "type": "checkbox",
+        "id": "show_social",
+		"label": "Show social buttons",
+        "default": false
+  	  },
+	  {
+        "type": "radio",
+        "id": "enable_timer_stg_on",
+        "default": "enable_timer_stg_on",
+        "options": [
+          {
+            "value": "enable_timer_stg_on",
+            "label": "ON timer"
+          },
+          {
+            "value": "enable_timer_stg_off",
+            "label": "OFF timer"
+          }
+        ],
+        "label": "Timer Setting ON\/OFF"
+      },
+	  {
+        "type": "header",
+        "content": "Dynamic Checkout Button"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_payment_button",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "default": false
+      },
+	  {
+        "type": "header",
+        "content": "Variant Option [NEED HELP?](https:\/\/help.boostertheme.com\/hc\/en-us\/articles\/360002471493-How-to-Upload-Your-Color-Swatches-in-Booster-2-0-)"
+      },
+      {
+        "type": "radio",
+        "id": "variant_swacth",
+        "label":"Variant type",
+        "info": "Choose between color swatch or drop down menu for the variant",
+        "options": [
+          {
+            "value": "one",
+          	"label": "Drop down menu"
+          },
+          {
+            "value": "two",
+            "label": "Color swatch"
+          }
+        ],
+          "default": "two"
+      },
+      {
+        "type":"header",
+        "content":"Swatch Option"
+      },
+      {
+        "type": "radio",
+        "id": "swatch_option",
+        "label":"Color Swatch style",
+        "options": [
+          {
+            "value": "with_background",
+          	"label": "Background Color or image"
+          },
+          {
+            "value": "without_background",
+            "label": "Show color title like other swatches"
+          }
+        ],
+          "default": "without_background"
+      },
+      {
+        "type":"paragraph",
+        "content":"When you choose 'background Color or image' option, you can change colors shape by using below option"
+      },
+      {
+        "type": "radio",
+        "id": "color_style",
+        "label":"Shape of Color Swatch",
+        "options": [
+          {
+            "value": "square_box",
+          	"label": "Square"
+          },
+          {
+            "value": "round_shape",
+            "label": "Round"
+          }
+        ],
+          "default": "round_shape"
+      },
+      {
+        "type":"header",
+        "content":"Product Review"
+      },
+      {
+        "type":"checkbox",
+        "label":"Enable rating and review",
+        "id":"product_review",
+        "info":"make sure your shopify review app must be install",
+        "default": true
+      },
+      {
+        "type":"header",
+        "content":"Visitor Counter"
+      },
+	  {
+        "type": "checkbox",
+        "id": "visitor_counter_enable",
+        "label": "Visitor Counter Enable"
+      },
+      {
+       "type": "select",
+       "id": "visitor_counter_number",
+       "label": "Visitor counter",
+       "default": "1-15",
+         "options": [
+         {
+           "value": "1-5",
+           "label": "1 to 5"
+         },
+         {
+           "value": "1-10",
+           "label": "1 to 10"
+         },
+          {
+           "value": "1-15",
+           "label": "1 to 15"
+         },
+          {
+           "value": "15-30",
+           "label": "15 to 30"
+         },
+          {
+           "value": "30-50",
+           "label": "30 to 50"
+         },
+          {
+           "value": "50-100",
+           "label": "50 to 100"
+         },
+          {
+           "value": "100-300",
+           "label": "100 to 300"
+         },
+          {
+           "value": "300-500",
+           "label": "300 to 500"
+         }
+       ]
+     },
+      {
+        "type":"header",
+        "content":"Delivery Time"
+      },
+	  {
+        "type":"checkbox",
+        "id": "show_del_time",
+		"label":"Enable Delivery Time",
+        "default": true
+      },
+	  {
+        "type": "select",
+        "id": "delivery_time_number",
+        "label": "Delivery time",
+        "default": "1-3",
+          "options": [
+          {
+            "value": "1-3",
+            "label": "1 to 3"
+          },
+          {
+            "value": "3-5",
+            "label": "3 to 5"
+          },
+          {
+            "value": "5-10",
+            "label": "5 to 10"
+          },
+		  {
+            "value": "7-14",
+            "label": "7 to 14"
+          },
+		  {
+            "value": "14-21",
+            "label": "14 to 21"
+          },
+		  {
+            "value": "14-30",
+            "label": "14 to 30"
+          },
+		  {
+            "value": "21 - 30",
+            "label": "21 to 30"
+          }
+        ]
+      },
+	  {
+		"type": "header",
+		"content": "Desktop"
+	  },
+	  {
+        "type": "select",
+        "id": "product_description",
+        "label": "Product Description",
+        "default": "under_the_price",
+          "options": [
+          {
+            "value": "under_the_price",
+            "label": "Under the price"
+          },
+		  {
+            "value": "under_the_timer",
+            "label": "Under the timer"
+          }
+        ]
+      },
+	  {
+		"type": "header",
+		"content": "Mobile"
+	  },
+	  {
+        "type": "checkbox",
+        "id": "enable_sticky",
+        "label": "Enable Sticky button",
+        "default": true
+      },
+	  {
+        "type": "select",
+        "id": "sticky_button",
+        "label": "Sticky Button",
+        "default": "show_timer",
+        "options": [
+          {
+            "value": "show_timer",
+            "label": "Show timer"
+          },
+		  {
+            "value": "show_progress_bar",
+            "label": "Show progress bar"
+          }
+        ]
+      },
+	  {
+		"type": "header",
+		"content": "Badges"
+	  },
+      {
+        "type": "checkbox",
+        "id": "move_badges_under_cart",
+        "label": "Move Badges below the Add-to-cart button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_trust_badges",
+        "label": "Enable Badges",
+        "default": true
+      },
+	  {
+        "type": "image_picker",
+        "id": "enable_trust_badges_image",
+        "label": "Payment icons"
+      }
+    ]
+  }
+{% endschema %}

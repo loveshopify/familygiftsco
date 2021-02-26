@@ -1,0 +1,41 @@
+<div class="Dropdown" data-identifier="sortDropdown" data-component="Dropdown">
+  <a href="#" class="Dropdown__trigger">
+    {% comment %} <span>Sort by:</span> {% endcomment %}
+    {% case collection.sort_by %}
+      {% when 'best-selling' %}
+        Best Sellers
+      {% when 'price-ascending' %}
+        Price (low to high)
+      {% when 'price-descending' %}
+        Price (high to low)
+      {% when 'created-ascending' %}
+        Oldest first
+      {% when 'created-descending' %}
+        Newest first
+      {% when 'title-ascending' %}
+        A-Z
+      {% when 'title-descending' %}
+        Z-A
+      {% else %}
+        Default Sort
+    {% endcase %}
+    <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+      <use href='#down2'></use>
+    </svg>
+  </a>
+  <div class="DropdownContainer">
+    <div class="Dropdown__contents" data-component="CollectionSort">
+      <span class="arrow"></span>
+      <nav class="Nav Nav--vertical js-sortBy">
+        <a href="#" class="Nav__item" data-value="manual">Featured</a>
+        <a href="#" class="Nav__item" data-value="best-selling">Best Selling</a>
+        <a href="#" class="Nav__item" data-value="price-ascending">Price: Low to High</a>
+        <a href="#" class="Nav__item" data-value="price-descending">Price: High to Low</a>
+        <a href="#" class="Nav__item" data-value="created-ascending">Oldest to Newest</a>
+        <a href="#" class="Nav__item" data-value="created-descending">Newest to Oldest</a>
+        <a href="#" class="Nav__item" data-value="title-ascending">A-Z</a>
+        <a href="#" class="Nav__item" data-value="title-descending">Z-A</a>
+      </nav>
+    </div>
+  </div>
+</div>

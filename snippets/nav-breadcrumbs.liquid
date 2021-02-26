@@ -1,0 +1,73 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' %}
+
+{% assign t = template | split: '.' | first %}
+
+<div class="Nav Nav--breadcrumbs" role="navigation" aria-label="breadcrumbs">
+    <div class="Nav__item">
+      <a href="/" title="Home">Home</a>
+    </div>
+
+  {% case t %}
+  {% when 'page' %}
+
+    <div class="Nav__item">
+      <a href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+    </div>
+
+  {% when 'product' %}
+
+    {% if collection.url %}
+      <div class="Nav__item">
+        {{ collection.title | link_to: collection.url }}
+      </div>
+    {% endif %}
+
+      <div class="Nav__item">
+        <a href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+      </div>
+
+  {% when 'collection' and collection.handle %}
+
+    {% if current_tags %}
+      <div class="Nav__item">{{ collection.title | link_to: collection.url }}</div>
+      <div class="Nav__item">
+        {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+        <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
+      </div>
+    {% else %}
+      <div class="Nav__item">
+        <a href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+      </div>
+    {% endif %}
+
+  {% when 'blog' %}
+
+    {% if current_tags %}
+      <div class="Nav__item">{{ blog.title | link_to: blog.url }}</div>
+      <div class="Nav__item">
+        {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+        <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+      </div>
+    {% else %}
+      <div class="Nav__item">
+        <a href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+      </div>
+    {% endif %}
+
+  {% when 'article' %}
+
+    <div class="Nav__item">{{ blog.title | link_to: blog.url }}</div>
+    <div class="Nav__item">
+      <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+    </div>
+
+  {% else %}
+
+    <div class="Nav__item" aria-current="page">
+      <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+    </div>
+
+  {% endcase %}
+
+</div>
+{% endunless %}

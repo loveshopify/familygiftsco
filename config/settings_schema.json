@@ -1,0 +1,1322 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Family Gifts Co.",
+    "theme_version": "1.0.0",
+    "theme_author": "Goodwin Media",
+    "theme_support_email": "ops@goodwinmedia.com",
+    "theme_documentation_url": "https:\/\/goodwin.media"
+  },
+  {
+    "name": "Social Profiles",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Media Links"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-facebook-check",
+        "label": "Display the Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social-facebook",
+        "label": "Facebook link"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-twitter-check",
+        "label": "Display the Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social-twitter",
+        "label": "Twitter link"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-pinterest-check",
+        "label": "Display the Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social-pinterest",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-instagram-check",
+        "label": "Display the Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social-instagram",
+        "label": "Instagram link"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-spotify-check",
+        "label": "Display the Spotify link"
+      },
+      {
+        "type": "text",
+        "id": "social-spotify",
+        "label": "Spotify link"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-youtube-check",
+        "label": "Display the YouTube link"
+      },
+      {
+        "type": "text",
+        "id": "social-youtube",
+        "label": "YouTube link"
+      },
+      {
+        "type": "checkbox",
+        "id": "social-tumblr-check",
+        "label": "Display the Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social-tumblr",
+        "label": "Tumblr link"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Customily Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Enable General"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_enabled",
+        "label": "Enable Customily",
+        "default": true,
+        "info": "Enable customily in theme"
+      },
+      {
+        "type": "header",
+        "content": "Save User Images"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_save_user_images",
+        "label": "Save user uploaded images",
+        "default": true,
+        "info": "Save orginal images users uploaded alongside Customily outputs"
+      },
+      {
+        "type": "header",
+        "content": "Product Based Enable"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_enable_tag_is",
+        "label": "Enable Customily with tag",
+        "info": "Enable Customily functionality per product with a tag"
+      },
+      {
+        "type": "text",
+        "id": "customily_enable_tag",
+        "label": "Enable tag"
+      },
+      {
+        "type": "header",
+        "content": "Product Based Disable"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_disable_tag_is",
+        "label": "Disable Customily with tag",
+        "info": "Disable Customily functionality per product with a tag"
+      },
+      {
+        "type": "text",
+        "id": "customily_disable_tag",
+        "label": "Disable tag"
+      },
+      {
+        "type": "header",
+        "content": "Touch on Customily Canvas"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_touch_enable_tag_is",
+        "label": "Enable editable canvas on touch devices with a tag",
+        "info": "Enable this if you have a Customily product with user uploaded image and image needs to be adjusted"
+      },
+      {
+        "type": "text",
+        "id": "customily_touch_enable_tag",
+        "label": "Enable editable canvas tag",
+        "info": "When this tag is added to a product, Customily canvas will not participate in touch scroll. This is usually unwanted behavior but necessary for transforming image on canvas."
+      },
+      {
+        "type": "header",
+        "content": "Hover Zoom on Customily Canvas"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_hover_zoom",
+        "label": "Zoom when Customily canvas hovered",
+        "info": "Hover zoom functionality at 2x"
+      },
+      {
+        "type": "text",
+        "id": "customily_hover_zoom_not_tag",
+        "label": "Disable hover zoom tag",
+        "info": "When you want to disable \"hover zoom\" for a product, set this setting and give desired product the tag you set"
+      },
+      {
+        "type": "header",
+        "content": "Customily Image Placeholder Behavior"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_image_covers",
+        "label": "Cover customily images when set",
+        "default": true,
+        "info": "Cover available area when image set for a Customily placeholder image"
+      },
+      {
+        "type": "text",
+        "id": "customily_image_covers_not_tag",
+        "label": "Disable cover tag",
+        "info": "When you want to disable covering for a product, set this setting and give desired product the tag you set"
+      },
+      {
+        "type": "header",
+        "content": "Customily Additional Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "customily_save_device_info",
+        "label": "Save device info in order notes",
+        "default": true,
+        "info": "Set this setting to save device info (os and browser) in order notes"
+      }
+    ]
+  },
+  {
+    "name": "Product page Timer & Progress bar",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product page Timer & Progress bar [NEED HELP?](https:\/\/help.boostertheme.com\/hc\/en-us\/articles\/360003026394-How-to-setup-product-page-timer-and-stock-level-)"
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_delivery_use_tag",
+        "label": "Delivery disable using product tag",
+        "info": "Disable the Delivery from certain product by using product tag: no-delivery",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Product Page Timer"
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_timer_regular_price",
+        "label": "Disable timer on regular price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_timer_use_tag",
+        "label": "Timer disable using product tag",
+        "info": "Disable the timer from certain product by using product tag: no-timer",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "enable_timer_stg",
+        "label": "Timer Type",
+        "options": [
+          {
+            "value": "enable_timer_randomly",
+            "label": "Random"
+          },
+          {
+            "value": "enable_timer_custom_time_revise",
+            "label": "Evergreen"
+          },
+          {
+            "value": "enable_timer_custom",
+            "label": "Custom"
+          }
+        ],
+        "default": "enable_timer_custom_time_revise",
+        "info": "Random : Randomly show up a different time on every products (Cookie based). Evergreen : Time will reset everyday at the time you choose. Custom : Choose the amount of time left and show up the same timer on every products (Cookie based). Timer with inventory: Custom minutes and inventory based left number (Cookie based)."
+      },
+      {
+        "type": "header",
+        "content": "Evergreen Timer setting"
+      },
+      {
+        "type": "text",
+        "id": "enable_timer_reset_every_day",
+        "label": "Enable timer reset every day (hh:mm:ss)",
+        "default": "10:00:00",
+        "info": "User put time 24 hours - Example: 15:00:00, 09:09:10, 01:01:01 and for 24:00:00 put 23:59:59"
+      },
+      {
+        "type": "header",
+        "content": "Custom Timer setting"
+      },
+      {
+        "type": "number",
+        "id": "enable_timer_stg_custom",
+        "label": "Enable timer for custom seconds",
+        "info": "Example: 1500 second left = 25 minutes left. Note that the max second limit is 359999.",
+        "default": 150
+      },
+      {
+        "type": "header",
+        "content": "Progress bar"
+      },
+      {
+        "type": "select",
+        "id": "enable_inventory_stock_number",
+        "label": "Stock left",
+        "options": [
+          {
+            "value": "enable_stock_number_random",
+            "label": "Random"
+          },
+          {
+            "value": "enable_inventory_stock_number_with_not_desc",
+            "label": "Real time inventory"
+          },
+          {
+            "value": "enable_inventory_stock_number_with_desc",
+            "label": "Inventory reducer"
+          }
+        ],
+        "default": "enable_inventory_stock_number_with_not_desc",
+        "info": "Random : Randomly display a different amount left for every product (Cookie based). Real time inventory : Display the real amount left in stock from your Shopify products inventory. Inventory Reducer : Start reducing the amount left in stock from your Shopify products inventory. (Cookie based)"
+      }
+    ]
+  },
+  {
+    "name": "Filter Menu",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Components"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_refine",
+        "label": "Show Refine Section",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_collection_group",
+        "label": "Show Current Collection",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_clear",
+        "label": "Show Clear buttons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_view_all",
+        "label": "Show View All button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_collection_count",
+        "label": "Show collection count on All page",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_show_single_group",
+        "label": "Show groups with only one item",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_scroll_filter_group",
+        "label": "Scroll each group if too large",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_inactive_filters",
+        "label": "Show inactive filters (greyed out)",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Drop Downs"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_force_dropdown",
+        "label": "Force all filters to be drop downs",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_hide_headers",
+        "label": "Hide filter group headers on drop downs",
+        "default": false
+      },
+      {
+        "type": "radio",
+        "id": "pt_float_filters",
+        "label": "Layout",
+        "default": "false",
+        "options": [
+          {
+            "value": "false",
+            "label": "Vertical"
+          },
+          {
+            "value": "true",
+            "label": "Horizontal"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": "Groups will only layout horizontal if there is space, so if the filters are in your sidebar this may not have any effect."
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "text",
+        "id": "pt_refine_text",
+        "label": "Top of menu text",
+        "default": "Refine"
+      },
+      {
+        "type": "text",
+        "id": "pt_clear_text",
+        "label": "Clear filters text",
+        "default": "clear"
+      },
+      {
+        "type": "text",
+        "id": "pt_view_all_text",
+        "label": "View All text",
+        "default": "view all"
+      },
+      {
+        "type": "text",
+        "id": "pt_tags_text",
+        "label": "Tags group text",
+        "default": "Tags"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_by_text",
+        "label": "Sort group text",
+        "default": "Sort By"
+      },
+      {
+        "type": "text",
+        "id": "pt_collection_text",
+        "label": "Collection group text",
+        "default": "Collection"
+      },
+      {
+        "type": "text",
+        "id": "pt_search_placeholder_text",
+        "label": "Search placeholder text",
+        "default": "search..."
+      },
+      {
+        "type": "text",
+        "id": "pt_mobile_text",
+        "label": "Filter Button Text",
+        "default": "Filter"
+      },
+      {
+        "type": "header",
+        "content": "Filter By Tags"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_tags_group",
+        "label": "Show unused\/ungrouped tags as a 'Tags' group",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_tags_grouped",
+        "label": "Show grouped tags as filters",
+        "default": false
+      },
+      {
+        "type": "paragraph",
+        "content": "Grouped tags use the format Group Name_Filter Value. e.g. Format_USB, or Compatibility_X Box One X"
+      },
+      {
+        "type": "header",
+        "content": "Sort By"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_sort_by_group",
+        "label": "Show a 'Sort By' group",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "pt_sort_position",
+        "label": "Sort Position",
+        "default": "bottom",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top (First)"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom (Last)"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_sort_by_dropdown",
+        "label": "Display 'Sort By' group as a drop down box",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_sort_by_checkboxes",
+        "label": "Show checkboxes on 'Sort By' group",
+        "default": false
+      },
+      {
+        "type": "paragraph",
+        "content": "Leave empty to hide a sort option"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_manual_text",
+        "label": "Manual",
+        "default": "Featured"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_price_asc_text",
+        "label": "Price Ascending",
+        "default": "Price: Low to High"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_price_desc_text",
+        "label": "Price Descending",
+        "default": "Price: High to Low"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_title_asc_text",
+        "label": "A-Z",
+        "default": "A-Z"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_title_desc_text",
+        "label": "Z-A",
+        "default": "Z-A"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_created_asc_text",
+        "label": "Newest Last",
+        "default": "Newest Last"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_created_desc_text",
+        "label": "Newest First",
+        "default": "Newest"
+      },
+      {
+        "type": "text",
+        "id": "pt_sort_best_selling_text",
+        "label": "Best Selling",
+        "default": "Best Selling"
+      },
+      {
+        "type": "header",
+        "content": "Group Header"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_header_text",
+        "label": "Text",
+        "default": "#222"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_header_border",
+        "label": "Line Underneath",
+        "default": "#DDD"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_header_top_border",
+        "label": "Line On Top",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "range",
+        "id": "pt_header_size",
+        "label": "Font Size",
+        "min": 0,
+        "max": 35,
+        "step": 1,
+        "unit": "px",
+        "default": 18
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_header_font_override",
+        "label": "Override theme font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "pt_header_font",
+        "label": "Base Typeface",
+        "default": "work_sans_n6"
+      },
+      {
+        "type": "select",
+        "id": "pt_header_weight",
+        "label": "Font Weight",
+        "default": "600",
+        "options": [
+          {
+            "value": "100",
+            "label": "Light"
+          },
+          {
+            "value": "300",
+            "label": "Normal"
+          },
+          {
+            "value": "600",
+            "label": "Bold"
+          },
+          {
+            "value": "900",
+            "label": "Bolder"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Filter Links"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_links",
+        "label": "Filters",
+        "default": "#222"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_links_selected",
+        "label": "Selected Filters",
+        "default": "#333"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_links_hover",
+        "label": "Filter Hover",
+        "default": "#444"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_counts_color",
+        "label": "Collection Counts",
+        "default": "#888"
+      },
+      {
+        "type": "range",
+        "id": "pt_links_size",
+        "label": "Font Size",
+        "min": 8,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_links_font_override",
+        "label": "Override theme font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "pt_links_font",
+        "label": "Base Typeface",
+        "default": "work_sans_n6"
+      },
+      {
+        "type": "select",
+        "id": "pt_links_weight",
+        "label": "Font Weight",
+        "default": "300",
+        "options": [
+          {
+            "value": "100",
+            "label": "Light"
+          },
+          {
+            "value": "300",
+            "label": "Normal"
+          },
+          {
+            "value": "600",
+            "label": "Bold"
+          },
+          {
+            "value": "900",
+            "label": "Bolder"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Checkboxes"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_checkboxes",
+        "label": "Show Checkboxes",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "pt_checkbox_style",
+        "label": "Checkbox Style",
+        "default": "0",
+        "options": [
+          {
+            "value": "0",
+            "label": "Rounded"
+          },
+          {
+            "value": "1",
+            "label": "Square Solid"
+          },
+          {
+            "value": "2",
+            "label": "Square Hollow"
+          },
+          {
+            "value": "3",
+            "label": "Round Hollow"
+          },
+          {
+            "value": "4",
+            "label": "Ticks Solid"
+          },
+          {
+            "value": "5",
+            "label": "Crosses Solid"
+          },
+          {
+            "value": "6",
+            "label": "Ticks"
+          },
+          {
+            "value": "7",
+            "label": "Crosses"
+          },
+          {
+            "value": "8",
+            "label": "Crosses (Original Style)"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "pt_checkbox_swatch_style",
+        "label": "Swatch Checkbox Style",
+        "default": "3",
+        "options": [
+          {
+            "value": "0",
+            "label": "Rounded"
+          },
+          {
+            "value": "1",
+            "label": "Square Solid"
+          },
+          {
+            "value": "2",
+            "label": "Square Hollow"
+          },
+          {
+            "value": "3",
+            "label": "Round Hollow"
+          },
+          {
+            "value": "4",
+            "label": "Ticks Solid"
+          },
+          {
+            "value": "5",
+            "label": "Crosses Solid"
+          },
+          {
+            "value": "6",
+            "label": "Ticks"
+          },
+          {
+            "value": "7",
+            "label": "Crosses"
+          },
+          {
+            "value": "8",
+            "label": "Crosses (Original Style)"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "pt_checkbox_primary_color",
+        "label": "Default Color",
+        "default": "#888"
+      },
+      {
+        "type": "color",
+        "id": "pt_checkbox_secondary_color",
+        "label": "Selected Color",
+        "default": "#444"
+      },
+      {
+        "type": "range",
+        "id": "pt_checkbox_size",
+        "label": "Checkbox Size",
+        "min": 4,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "pt_checkbox_size_swatch",
+        "label": "Swatch Size",
+        "min": 4,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 25
+      },
+      {
+        "type": "select",
+        "id": "pt_checkbox_checkbox_align",
+        "label": "Checkbox alignment",
+        "default": "middle",
+        "options": [
+          {
+            "value": "middle",
+            "label": "Middle"
+          },
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Color Swatches"
+      },
+      {
+        "type": "radio",
+        "id": "pt_color_swatch_type",
+        "label": "Swatch Type",
+        "default": "swatch",
+        "options": [
+          {
+            "value": "swatch",
+            "label": "Swatch only"
+          },
+          {
+            "value": "swatch_text",
+            "label": "Swatch plus text"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Clear Button"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_clear_bg",
+        "label": "Background",
+        "default": "#EEE"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_clear_text",
+        "label": "Text",
+        "default": "#222"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_clear_bg_hover",
+        "label": "Background Hover",
+        "default": "#DDD"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_clear_text_hover",
+        "label": "Text Hover",
+        "default": "#222"
+      },
+      {
+        "type": "header",
+        "content": "Background Color"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_bg",
+        "label": "Background Color",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_bg_border",
+        "label": "Border Color",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "range",
+        "id": "pt_bg_padding",
+        "label": "Padding",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "pt_bg_radius",
+        "label": "Border Radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 3
+      },
+      {
+        "type": "header",
+        "content": "Accordions"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_mobile_enable",
+        "label": "Show Mobile Accordion",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_accordion_enable",
+        "label": "Show Desktop Accordion",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "pt_accordion_mode",
+        "label": "Desktop Accordion Mode",
+        "options": [
+          {
+            "value": "all",
+            "label": "Expand All"
+          },
+          {
+            "value": "first",
+            "label": "Expand First (Non Selected)"
+          },
+          {
+            "value": "none",
+            "label": "Collapse All"
+          }
+        ],
+        "default": "all"
+      },
+      {
+        "type": "color",
+        "id": "pt_mobile_color",
+        "label": "Color",
+        "default": "#222"
+      },
+      {
+        "type": "text",
+        "id": "pt_mobile_max_width",
+        "label": "CSS Max Width For Display",
+        "default": "767px"
+      },
+      {
+        "type": "range",
+        "id": "pt_mobile_vertical",
+        "label": "Vertical Offset",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 7
+      },
+      {
+        "type": "range",
+        "id": "pt_mobile_text_vertical",
+        "label": "Vertical Offset - Text",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_mobile_font_override",
+        "label": "Override theme font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "pt_mobile_font",
+        "label": "Base Typeface",
+        "default": "work_sans_n6"
+      },
+      {
+        "type": "select",
+        "id": "pt_mobile_size",
+        "label": "Filter button size",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "Standard"
+          },
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "xsmall",
+            "label": "Extra Small"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_mobile_hide_selected",
+        "label": "Hide selected filters on mobile",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Small Box Options"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_small_box_bg",
+        "label": "Background Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_small_box_bg_hover",
+        "label": "Background Hover",
+        "default": "#00a5fd"
+      },
+      {
+        "type": "color",
+        "id": "color_pt_small_box_text_hover",
+        "label": "Text Hover",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "range",
+        "id": "pt_small_box_radius",
+        "label": "Border Radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 3
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_small_box_border",
+        "label": "Show Border",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_small_box_shadow",
+        "label": "Show Shadow",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "View More button"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_view_more_enable",
+        "label": "Add View More button",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "pt_view_more_count",
+        "label": "Items to display",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "default": 10
+      },
+      {
+        "type": "text",
+        "id": "pt_view_more_text",
+        "label": "Button Text",
+        "default": "View More..."
+      },
+      {
+        "type": "header",
+        "content": "'Apply' Filters button"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_apply_button_enable",
+        "label": "Add Apply button",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "pt_apply_button_text",
+        "label": "Button Text",
+        "default": "Apply"
+      },
+      {
+        "type": "color",
+        "id": "pt_apply_button_color",
+        "label": "Active Color",
+        "default": "#0084FF"
+      },
+      {
+        "type": "color",
+        "id": "pt_apply_button_hover_color",
+        "label": "Hover Color",
+        "default": "#0670Cf"
+      },
+      {
+        "type": "color",
+        "id": "pt_apply_button_disabled_color",
+        "label": "Disabled Color",
+        "default": "#CCCCCC"
+      },
+      {
+        "type": "header",
+        "content": "Sticky Mode"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_sticky_enable",
+        "label": "Enable sticky mode",
+        "default": false
+      },
+      {
+        "type": "paragraph",
+        "content": "Basic CSS mode may not work on all themes. Use Advanced mode to set the appropriate CSS selector. Or use the JavaScript fallback"
+      },
+      {
+        "type": "radio",
+        "id": "pt_sticky_mode",
+        "label": "Sticky Mode",
+        "default": "basic",
+        "options": [
+          {
+            "value": "basic",
+            "label": "Basic CSS mode"
+          },
+          {
+            "value": "advanced",
+            "label": "Advanced CSS mode"
+          },
+          {
+            "value": "js",
+            "label": "JavaScript mode"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "pt_sticky_selector",
+        "label": "CSS selector for advanced mode",
+        "default": ".filter-menu"
+      },
+      {
+        "type": "text",
+        "id": "pt_sticky_offset",
+        "label": "Set sticky offset from the top of the window",
+        "default": "25px"
+      },
+      {
+        "type": "text",
+        "id": "pt_sticky_min_width",
+        "label": "Minimum screen width to activate sticky mode",
+        "default": "767px"
+      },
+      {
+        "type": "header",
+        "content": "Ajax reloading"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_ajax_enable",
+        "label": "Enable Ajax reloading",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "pt_ajax_selector",
+        "label": "Content selector",
+        "default": "#main"
+      },
+      {
+        "type": "paragraph",
+        "content": "The content selector is a CSS selector that includes the Filter Menu and products"
+      },
+      {
+        "type": "text",
+        "id": "pt_ajax_script",
+        "label": "Additional Scripts",
+        "default": ";"
+      },
+      {
+        "type": "paragraph",
+        "content": "Any scripts to run after the Ajax load is complete."
+      },
+      {
+        "type": "header",
+        "content": "Advanced Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_show_only_on_collections",
+        "label": "Show only on collection pages",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_clear_to_current_collection",
+        "label": "'Clear All' goes to current collection, not all products",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_desktop_always_show_selected",
+        "label": "Active filters override visibility settings",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "pt_filter_padding",
+        "label": "Filter spacing",
+        "min": 0,
+        "max": 15,
+        "step": 1,
+        "unit": "px",
+        "default": 6
+      },
+      {
+        "type": "checkbox",
+        "id": "pt_temporary_disable",
+        "label": "Disable the display of the Filter Menu temporarily",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "text",
+        "id": "klaviyo_link",
+        "label": "KLAVIYO",
+        "info": "Please copy the hidden input[name='g'] value from the KLAVIYO form and paste here."
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Display Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_gift_card_stats",
+        "label": "Show Gift Card Stats"
+      }
+    ]
+  },
+  {
+    "name": "Development",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Development Mode"
+      },
+      {
+        "type": "checkbox",
+        "id": "developer_mode",
+        "label": "Enable",
+        "info": "When enabled will load development versions of application javascript. Do not keep enabled in production."
+      }
+    ]
+  }
+]

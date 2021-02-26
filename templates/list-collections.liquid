@@ -1,0 +1,8 @@
+<div class="Main__layout Container">
+  {% comment %} <div class="Main__header">Header</div> {% endcomment %}
+  <div class="Main__content">
+    {% assign collection = collections.all %}
+    {% include 'collection-loop', per_page: 24, collection: collection %}
+  </div>
+</div>
+

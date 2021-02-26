@@ -1,0 +1,52 @@
+{%- assign blog = blogs[section.settings.blogHandle] -%}
+
+<div class="Container Container--narrow">
+  <header class="Section__header">
+    <h4>{{ section.settings.title }}</h4>
+  </header>
+  <div class="Section__content">
+    <div class="Loop Loop--blog">
+      {% for article in blog.articles limit: section.settings.articles_limit %}
+        {% render 'article-card' with article as article %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Articles",
+    "class": "Section Section--featuredArticles",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Articles"
+      },
+      {
+         "type":      "blog",
+         "id":        "blogHandle",
+         "label":     "Text",
+         "info":      "Text"
+      },
+      {
+        "type": "select",
+        "id": "articles_limit",
+        "options": [
+            { "value": "3", "label": "3 Articles"},
+            { "value": "6", "label": "6 Articles"},
+            { "value": "12", "label": "12 Articles"}
+        ],
+        "default": "3",
+        "label": "Article count"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Articles",
+        "category": "Blog"
+      }
+    ]
+  }
+{% endschema %}

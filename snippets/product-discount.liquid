@@ -1,0 +1,10 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{%- assign compare_at_price = current_variant.compare_at_price -%}
+{%- assign price = current_variant.price -%}
+{%- assign price_varies = product.price_varies -%}
+
+{% assign sale = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round  %}
+
+<span class="Badge" data-product-discount>
+  <span data-product-discount-percentage>{{ sale }}</span>% Off
+</span>

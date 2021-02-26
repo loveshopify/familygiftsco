@@ -1,0 +1,93 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<div class="Container Container--narrow">
+  <header class="Section__header">
+    <h4>{{ section.settings.title }}</h4>
+  </header>
+  <div class="Section__content">
+    <div class="Loop Loop--card">
+      {% for block in section.blocks %}
+        {%- assign collection = collections[block.settings.collection] -%}
+        {%- assign image = block.settings.image | default: collection.image -%}
+        <div
+          class="Card Card--collection"
+          data-layout="vertical media-content"
+          >
+          <div class="Card__media">
+            <a href="{{ collection.url }}">
+              <img
+                data-src="{{ image | img_url: '200x' }}"
+                data-srcset="
+                  {{ image | img_url: '400x' }} 400w,
+                  {{ image | img_url: '1200x' }} 1200w,
+                  {{ image | img_url: '1600x' }} 1600w,
+                  {{ image | img_url: '2200x' }} 2200w
+                "
+                width="{{ image.width }}"
+                height="{{ image.height }}"
+                alt="{{ block.settings.title }}"
+                class="lazyload"
+              >
+            </a>
+          </div>
+          <div class="Card__details">
+            <a href="{{ collection.url }}">
+              {{ block.settings.title | default: collection.title }}
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+      {% comment %} {% for product in collection.products limit: section.settings.products_limit %}
+        {%- comment %}<locksmith:71dc>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:71dc>{% endcomment -%}
+        {% render 'product-card' with product as product %}
+      {% endfor %} {% endcomment %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Collections",
+    "class": "Section Section--featuredCollections",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Collections"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "info": "Defaults to the collection title"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collections",
+        "category": "Store"
+      }
+    ]
+  }
+{% endschema %}

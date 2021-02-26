@@ -1,0 +1,54 @@
+<div class="ProductGallery {% if product.images.size >= 2 %}has-thumbs{% endif %}" data-component="ProductGallery">
+  <div class="inner">
+    {% include 'customily-canvas' %}
+
+    <div class="mainImage">
+      {% for media in product.media %}
+        {% if forloop.first %}
+          <figure class="Gallery__item">
+            {% render 'product-gallery-media' with media as media %}
+          </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="Gallery__thumbs">
+      {% comment %} {% if product.images.size > 1 %}
+        <div class="Gallery__status"><span class="current"></span>/<span class="total"></span></div>
+        <div class="Gallery__navigation">
+          <button type="button" class="previous Button" data-style="noStyle" data-layout="noLayout">
+            <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+              <use xlink:href='#left'></use>
+            </svg>
+          </button>
+          <button type="button" class="next Button" data-style="noStyle" data-layout="noLayout">
+            <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+              <use xlink:href='#right'></use>
+            </svg>
+          </button>
+        </div>
+      {% endif %} {% endcomment %}
+      <div class="wrapper">
+        {% for media in product.media %}
+          <a href="{{ media | img_url: '1600x' }}" class="zoom">
+            <figure>
+                <img
+                  data-sizes="auto"
+                  data-src="{{ media | img_url: '100x' }}"
+                  data-srcset="
+                      {{ media | img_url: '200x' }} 200w,
+                      {{ media | img_url: '400x' }} 400w,
+                      {{ media | img_url: '800x' }} 800w
+                      "
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                  class="lazyload fadeup"
+                  alt="{{ product.title }}" />
+            </figure>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+

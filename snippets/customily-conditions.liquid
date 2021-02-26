@@ -1,0 +1,41 @@
+{% assign enable_tag = settings.customily_enable_tag %}
+{% assign disable_tag = settings.customily_disable_tag %}
+{% assign touch_enable_tag = settings.customily_touch_enable_tag %}
+{% assign customily_show = true %}
+
+{% assign customily_touch_enabled = false %}
+{% assign customily_hover_zoom = false %}
+
+{% if settings.customily_hover_zoom %}
+  {% unless product.tags contains settings.customily_hover_zoom_not_tag %}
+    {% assign customily_hover_zoom = true %}
+  {% endunless %}
+{% endif %}
+
+{% assign customily_image_covers = false %}
+
+{% if settings.customily_image_covers %}
+  {% unless product.tags contains settings.customily_image_covers_not_tag %}
+    {% assign customily_image_covers = true %}
+  {% endunless %}
+{% endif %}
+
+ {% if settings.customily_enable_tag_is %}
+	{% assign customily_show = false %}
+
+    {%if product.tags contains enable_tag %}
+        {% assign customily_show = true %}
+     {% endif %}
+ {% endif %}
+
+ {% if settings.customily_disable_tag_is %}
+	{% assign customily_show = true %}
+
+    {%if product.tags contains disable_tag %}
+        {% assign customily_show = false %}
+     {% endif %}
+ {% endif %}
+
+{%if settings.customily_touch_enable_tag_is and product.tags contains customily_touch_enable_tag %}
+	{% assign  customily_touch_enabled = true %}
+{% endif %}

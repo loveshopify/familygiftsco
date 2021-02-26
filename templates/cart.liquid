@@ -1,0 +1,233 @@
+{% for item in cart.items%}
+  {% if item.variant.compare_at_price > item.variant.price and item.variant.price != '0' %}
+    {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
+    {% assign was = item.variant.compare_at_price |  times: item.quantity %}
+    {% assign total_saving = saving | plus: total_saving %}
+    {% assign total_saving_was = was | plus: total_saving_was %}
+  {% endif %}
+{% endfor %}
+
+<div class="Main__layout Container Container--narrow">
+  <header class="Main__header">
+    <a href="/" class="Button" data-style="navy outline" data-layout="small">
+      <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+        <use href='#arrow-left'></use>
+      </svg>
+      <span>Keep Shopping</span>
+    </a>
+    <h1>Your Cart</h1>
+    <div class="announcement u-show--fromDesktop">
+      <div class="icon-wrapper">
+        <svg viewBox='0 0 40 20' class='icon'>
+          <use href='#shipping'></use>
+        </svg>
+      </div>
+      <p><strong>COVID-19 MESSAGE:</strong> As a USA based business, we appreciate our community's overwhelmingly positive response under the current pandemic. Due to the national impact of this crisis on our business, including our Michigan fulfillment team, our average delivery times are currently 10-14 days. Please order as soon as possible to guarantee the quickest delivery date. We will get through this difficult time together.</p>
+    </div>
+  </header>
+  <div class="Main__content">
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post" novalidate>
+        <div class="cart-header-for-mobile">
+          {% render 'cart-totals', cart: cart, total_saving: total_saving, original_value: total_saving_was %}
+          {% render 'cart-resume', cart: cart, total_saving: total_saving, original_value: total_saving_was %}
+        </div>
+        <div class="cart-main">
+          <table class="responsive-table table-cart-items">
+            {% comment %} <thead class="small--hide">
+              <tr>
+                <th colspan="2">{{ 'cart.label.product' | t }}</th>
+                <th>{{ 'cart.label.quantity' | t }}</th>
+                <th>{{ 'cart.label.price' | t }}</th>
+                <th>{{ 'cart.label.total' | t }}</th>
+              </tr>
+            </thead> {% endcomment %}
+            <tbody>
+
+              {% for item in cart.items %}
+
+                {% comment %}
+
+                Cart Item Template
+                =====================
+                The data-label attributes on <td> elements are mobile-friendly
+                helpers used for responsive-table labels
+                {% endcomment %}
+
+                <tr
+                  class="responsive-table-row cart-line-item divider"
+                  style="{% include 'product-customizer-helper' with 'hide-pricing-item-row' %}"
+                  {% include 'product-customizer-helper' with 'cart-row-data' %}
+                  >
+                  <td class="image cart__image-wrapper" data-label="{{ 'customer.order.product' | t }}" rowspan="2">
+                    {% if item.image != blank %}
+                      <a href="{{ item.url | within: collections.all }}" class="thumbnail">
+                        {% include 'customily-cart-image' %}
+                        {% if custom_img.last == '' %}
+                          {% comment %} Default Image {% endcomment %}
+                          <img
+                            data-sizes="auto"
+                            data-src="{{ item.image | img_url: '400x' }}"
+                            data-srcset="
+                                {{ item.image | img_url: '400x' }} 400w,
+                                {{ item.image | img_url: '800x' }} 800w,
+                                {{ item.image | img_url: '1600x' }} 1600w"
+                            class="lazyload fadeup mainImg"
+                            alt="{{ item.product.title }}" />
+                        {% else %}
+                          {% comment %} Customily Uploaded Image {% endcomment %}
+                          <img src="{{ custom_img.last }}" alt="{{ item.title | escape }}" />
+                        {% endif %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="product-details"><label>Product</label></td>
+                  <td class="qty"><label>Quantity</label></td>
+                  <td class="price"><label>Unit Price</label></td>
+                  <td class="remove"></td>
+                </tr>
+                <tr class="responsive-table-row cart-line-item details" style="{% include 'product-customizer-helper' with 'hide-pricing-item-row' %}">
+
+                  <td class="product-details">
+                    <a href="{{ item.url }}" class="product-title">{{ item.product.title }}</a>
+
+                    {% unless item.product.has_only_default_variant %}
+                      <p>{{ item.variant.title }}</p>
+                    {% endunless %}
+
+                    {% comment %} <p>{{ item.vendor }}</p> {% endcomment %}
+
+                    {%- assign property_size = item.properties | size -%}
+                    <dl class="product-properties">
+                      {% if property_size > 0 %}
+                        {% for p in item.properties %}
+                          {%- if p.first.first == '_' -%}{%- continue -%}{%- endif -%}
+                          {% unless p.last == blank or p.first == 'subscription_id' or p.first == 'shipping_interval_frequency' or p.first == 'shipping_interval_unit_type'%}
+                            <div>
+                              <dt>{{ p.first }}:</dt>
+                              <dd>
+                                {% if p.last contains '/uploads/' %}
+                                  <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                {% else %}
+                                  {{ p.last }}
+                                {% endif %}
+                              </dd>
+                            </div>
+                          {% endunless %}
+                        {% endfor %}
+                      {% endif %}
+                    </dl>
+
+                    {% comment %} {% include 'product-customizer-helper' %} {% endcomment %}
+
+                  </td>
+                  <td class="qty" data-label="{{ 'cart.label.quantity' | t }}">
+                    {% comment %} {{ item.quantity }} {% endcomment %}
+                    <div class="StepperInput" data-component="StepperInput">
+                      <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" size="2" min="0" aria-label="{{ 'cart.general.item_quantity' | t }}">
+                    </div>
+                    <script type="application/json">
+                      {
+                        "name": "updated[]",
+                        "key": "{{ item.key }}",
+                        "min": 0,
+                        "value": {{ item.quantity }}
+                      }
+                    </script>
+                  </td>
+                  <td class="price" data-label="Unit Price">
+                    {% include 'product-customizer-helper' with 'item-price', items: cart.items %}
+                    {% comment %} {% if item.original_line_price != item.line_price %}
+                      <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+                      {{ item.price | money }}
+                      <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+                      <s>{{ item.original_price | money }}</s>
+                    {% else %}
+                      {{ item.price | money }}
+                    {% endif %} {% endcomment %}
+                  </td>
+                  <td class="remove">
+                      <a
+                        href="{% include 'product-customizer-helper' with 'remove-from-cart-href' %}"
+                        class="Button u-show--fromDesktop"
+                        data-style="navy outline"
+                        data-layout="small">
+                        <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+                          <use href='#close'></use>
+                        </svg>
+                      </a>
+                      <a
+                        href="{% include 'product-customizer-helper' with 'remove-from-cart-href' %}"
+                        class="Button u-show--untilDesktop"
+                        data-style="navy outline"
+                        data-layout="small">
+                        <span>Remove</span>
+                      </a>
+                  </td>
+                  {% comment %} <td data-label="{{ 'cart.label.total' | t }}">
+                    {{ item.line_price | money }}
+                  </td> {% endcomment %}
+                </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <div class="announcement u-show--untilDesktop">
+            <div class="icon-wrapper">
+              <svg viewBox='0 0 40 20' class='icon'>
+                <use href='#shipping'></use>
+              </svg>
+            </div>
+            <p><strong>COVID-19 MESSAGE:</strong> As a USA based business, we appreciate our community's overwhelmingly positive response under the current pandemic. Due to the national impact of this crisis on our business, including our Michigan fulfillment team, our average delivery times are currently 10-14 days. Please order as soon as possible to guarantee the quickest delivery date. We will get through this difficult time together.</p>
+          </div>
+
+          <div class="cart-notes">
+            <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+            <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+          </div>
+
+          <div class="securityBadges">
+            <h6>Secure Shopping</h6>
+            <hr>
+            <div class="figure">
+              <img src="{{ 'CartSecurityBadges.png' | asset_img_url: '460x' }}" alt="Secure Shopping">
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-aside">
+          <div class="inner">
+            {% render 'cart-totals', cart: cart, total_saving: total_saving, original_value: total_saving_was %}
+          </div>
+        </div>
+
+      </form>
+    {% else %}
+
+      {% comment %}
+      Cart empty state
+      {% endcomment %}
+      <div class="supports-cookies empty-cart-notice">
+        <p class="intro">{{ 'cart.general.empty' | t }}</p>
+        <a href="/" class="Button" data-style="dark outline">Keep Shopping</a>
+      </div>
+
+      {% comment %}
+      Cart no cookies state
+      ---------------------
+      Browser cookies are required to use the cart. If cookies aren't enabled in the
+      browser a message is displayed prompting the user to enable them.
+      {% endcomment %}
+      <div class="supports-no-cookies">
+        <p class="u-text-center">{{ 'cart.general.cookies_required' | t }}</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% include 'product-customizer-helper' with 'product-customizer-script' %}
+
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-602103002/P8R0CImi29sBENq5jZ8C'});
+</script>

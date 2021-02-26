@@ -1,0 +1,176 @@
+<header class="Header">
+  <div class="Container">
+    <div class="Header__nav Header__nav--mobile">
+      <div class="Header__mobileNav" data-component="MobileNav"></div>
+      <script type="application/json" data-main-menu-content hidden>
+        {%- assign collection = collections['hot-sellers'] -%}
+        {
+          "main": {%- include 'link-list-json' with linklists[section.settings.menu] -%},
+          "secondary": {%- include 'link-list-json' with linklists[section.settings.menu_secondary] -%},
+          "best_sellers": {%- include 'link-list-json' with linklists[section.settings.menu_bestsellers] -%},
+          "products": [{%- comment %}<locksmith:cc5d>{% endcomment -%}{%- assign locksmith_a5b2_forloop__size = 0 %}{% for product in collection.products limit:4 %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_a5b2_forloop__size = locksmith_a5b2_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_a5b2_forloop__index = nil -%}{%- comment %}</locksmith:cc5d>{% endcomment -%}{% for product in collection.products limit:4 %}{%- comment %}<locksmith:1d2a>{% endcomment -%}{%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_a5b2_forloop__index == nil %}{% assign locksmith_a5b2_forloop__index = 1 %}{% assign locksmith_a5b2_forloop__index0 = 0 %}{% else %}{% assign locksmith_a5b2_forloop__index = locksmith_a5b2_forloop__index | plus: 1 %}{% assign locksmith_a5b2_forloop__index0 = locksmith_a5b2_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_a5b2_forloop__index == 1 %}{% assign locksmith_a5b2_forloop__first = true %}{% else %}{% assign locksmith_a5b2_forloop__first = false %}{% endif %}{% if locksmith_a5b2_forloop__index == locksmith_a5b2_forloop__size %}{% assign locksmith_a5b2_forloop__last = true %}{% else %}{% assign locksmith_a5b2_forloop__last = false %}{% endif %}{% assign locksmith_a5b2_forloop__rindex = locksmith_a5b2_forloop__size | minus: locksmith_a5b2_forloop__index | minus: 1 %}{% assign locksmith_a5b2_forloop__rindex0 = locksmith_a5b2_forloop__size | minus: locksmith_a5b2_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}{%- comment %}</locksmith:1d2a>{% endcomment -%}{{ product | json }}{% unless locksmith_a5b2_forloop__last %},{% endunless %}{% endfor %}]
+        }
+      </script>
+    </div>
+    <div class="Header__brand">
+      <a href="/" class="logo-image" alt="Back to homepage">
+        <img src="{{ 'FamilyGiftsCo.svg' | asset_url }}" alt="">
+      </a>
+    </div>
+    <div class="Header__nav Header__nav--primary">
+      <div class="Nav Nav--main" role="navigation" data-component="DesktopNav">
+        {% include "menu-options-mega" links: linklists[section.settings.menu].links %}
+      </div>
+    </div>
+    <div class="Header__nav Header__nav--secondary">
+      <div class="Nav Nav--utilities">
+        {% comment %} <div data-component="QuickSearch"></div> {% endcomment %}
+        <div class="Nav__item toggle-search" data-action="{ type: 'QuickSearch', target: 'QuickSearch', action: 'toggle'}" tabindex="0">
+          <svg viewBox='0 0 20 20' class='icon icon--primary' width='1em' height='1em'>
+            <use href='#search'></use>
+          </svg>
+        </div>
+        {% if shop.customer_accounts_enabled %}
+          <div class="Nav__item u-show--fromDesktop">
+            {% if customer.first_name != blank %}
+              <a href="/account">
+                <svg viewBox='0 0 20 20' class='icon icon--primary' width='1em' height='1em'>
+                  <use href='#user'></use>
+                </svg>
+              </a>
+            {% else %}
+              <a href="/account/login">
+                <svg viewBox='0 0 20 20' class='icon icon--primary' width='1em' height='1em'>
+                  <use href='#user'></use>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="MiniCart" data-component="MiniCart" data-logged-in="{{ customer.first_name }}" data-identifier="MiniCartPopup"></div>
+      </div>
+    </div>
+  </div>
+  {% if template == 'index' %}
+    <div class="Nav Nav--quickLinks u-show--untilTablet" role="navigation">
+      <div class="inner">
+        {% include "menu-options" links: linklists[section.settings.menu_quicklinks].links %}
+      </div>
+      <span class="deco"></span>
+    </div>
+  {% endif %}
+</header>
+
+<div class="QuickSearchDrawer" data-component="QuickSearch" data-identifier="QuickSearch">
+  <form action="/search" method="get" role="search" class="search">
+    <div class="inner">
+      <div class="wrapper">
+        <input type="hidden" name="type" value="product" />
+        <div class="searchWrapper">
+          <input type="text" name="q" id="Search" placeholder="Search store" />
+          <button type="submit" class="Button Button--noLayout">
+            <svg viewBox="0 0 20 20" class="icon" width="1em" height="1em">
+              <use xlinkHref="#search"></use>
+            </svg>
+          </button>
+        </div>
+        <button type="button" class="Button" data-style="text" data-action="{ type: 'QuickSearch', target: 'QuickSearch', action: 'toggle'}">
+          <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+            <use href='#close'></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </form>
+  <span class="backdrop" data-action="{ type: 'QuickSearch', target: 'QuickSearch', action: 'toggle'}"></span>
+</div>
+
+{% schema %}
+{
+  "name": "Site Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_bestsellers",
+      "label": "Best Sellers List",
+      "info": "Manages the list of products shown as Best Sellers on the mobile navigation drawer."
+    },
+    {
+      "type": "link_list",
+      "id": "menu_quicklinks",
+      "label": "Quicklinks",
+      "info": "Quick links navigation option for mobile users"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu-tout",
+      "name": "Menu Item Tout",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Menu Item",
+          "info": "Needs to match the menu item title for this tout to be matched and displayed on the site."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "intro",
+          "label": "Intro"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_pinterest_link }}",
+    "{{ settings.social_instagram_link }}",
+    "{{ settings.social_tumblr_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_youtube_link }}",
+    "{{ settings.social_vimeo_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+  </script>
+{% endif %}

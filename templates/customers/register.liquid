@@ -1,0 +1,76 @@
+<!-- /templates/customers/register.liquid -->
+<div class="Main__layout Container Container--narrow">
+  <header class="Main__header">
+    <h1>Create Account</h1>
+  </header>
+  <main class="Main__content">
+    {% form 'create_customer' %}
+
+      {{ form.errors | default_errors }}
+
+      <div class="Form__grid">
+        <div class="Form__input Grid-medium-1-2">
+          <label for="FirstName" class="label-hidden">
+            {{ 'customer.register.first_name' | t }}
+          </label>
+          <input type="text"
+            name="customer[first_name]"
+            id="FirstName"
+            placeholder="{{ 'customer.register.first_name' | t }}"
+            autofocus
+            {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+        </div>
+        <div class="Form__input Grid-medium-1-2">
+          <label for="LastName" class="label-hidden">
+            {{ 'customer.register.last_name' | t }}
+          </label>
+          <input type="text"
+            name="customer[last_name]"
+            id="LastName"
+            placeholder="{{ 'customer.register.last_name' | t }}"
+            {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+        </div>
+        <div class="Form__input Grid-medium-1-2">
+          <label for="Email" class="label-hidden">
+            {{ 'customer.register.email' | t }}
+          </label>
+          <input type="email"
+            name="customer[email]"
+            id="Email"
+            class="{% if form.errors contains 'email' %}input-error{% endif %}"
+            placeholder="{{ 'customer.register.email' | t }}"
+            value="{% if form.email %}{{ form.email }}{% endif %}"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off">
+        </div>
+        <div class="Form__input Grid-medium-1-2">
+          <label for="CreatePassword" class="label-hidden">
+            {{ 'customer.register.password' | t }}
+          </label>
+          <input type="password"
+            name="customer[password]"
+            id="CreatePassword"
+            class="{% if form.errors contains 'password' %}input-error{% endif %}"
+            placeholder="{{ 'customer.register.password' | t }}">
+        </div>
+      </div>
+
+      {% if cart.item_count > 0 %}
+        <input type="hidden" name="return_to" value="/cart" />
+      {% else %}
+        <input type="hidden" name="return_to" value="/account" />
+      {% endif %}
+
+      <div class="Nav Nav--sector">
+        <div class="Nav Nav--bar">
+          <a href="{{ shop.url }}" class="Nav__item Nav__item--main">{{ 'customer.register.cancel' | t }}</a>
+        </div>
+        <div class="Nav__item">
+          <button type="submit" class="Button" data-style="solid dark">{{ 'customer.register.submit' | t }}</button>
+        </div>
+      </div>
+
+    {% endform %}
+  </main>
+</div>

@@ -1,0 +1,97 @@
+{% comment %}
+  DO NOT EDIT
+  This code sets a global with the current path to the CDN where the site assets can be found.
+  This is necessary so that runtime scripts can make async requests to the network to load assets on demand
+{% endcomment %}
+{% capture randomFile %}{{ 'gwm.js' | asset_url }}{% endcapture %}
+{% assign assetsPath = randomFile | split: 'gwm.js' | first %}
+<script>window.__webpack_public_path__ = "{{ assetsPath }}"</script>
+
+{% comment %} <script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> {% endcomment %}
+<script>
+  window.Theme = {};
+  window.Theme.scripts = [];
+</script>
+
+{{ shop.metafields.loox["global_html_head"] }}
+
+<script>
+  {% comment %} LOAD GTM {% endcomment %}
+  window.Theme.scripts.push({
+    src: 'https://www.googletagmanager.com/gtag/js?id=AW-602103002',
+    callback: function() {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'AW-602103002');
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-MM6HTM2');
+    }
+  });
+
+  // Facebook Pixel Code added by SCOPO Marketing 6/6/2020
+  //var blankScriptSrc = {{'blank.js' | asset_url }};
+  // Theme.scripts.push({
+  //   src: "{{ 'blank.js' | asset_url}}",
+  //   callback: function() {
+  //     !function(f,b,e,v,n,t,s)
+  //     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  //     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  //     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  //     n.queue=[];t=b.createElement(e);t.async=!0;
+  //     t.src=v;s=b.getElementsByTagName(e)[0];
+  //     s.parentNode.insertBefore(t,s)}(window, document,'script',
+  //     'https://connect.facebook.net/en_US/fbevents.js');
+  //     fbq('init', '1799316603514037', {
+  //       {% if customer.email %}
+  //       em: '{{customer.email | sha256}}',
+  //       {% endif %}
+  //       {% if customer.first_name %}
+  //       fn: '{{customer.first_name | sha256}}',
+  //       {% endif %}
+  //       {% if customer.last_name %}
+  //       ln: '{{customer.last_name | sha256}}',
+  //       {% endif %}
+  //       {% if customer.phone %}
+  //       ph: '{{customer.phone | sha256}}',
+  //       {% endif %}
+  //       {% if customer and customer.default_address.zip %}
+  //       zp: '{{customer.default_address.zip | sha256}}',
+  //       {% endif %}
+  //     });
+  //     fbq('track', 'PageView');
+  //   }
+  // })
+  /*
+  */
+
+  // TikTok tracking
+  Theme.scripts.push({
+    src: "{{ 'blank.js' | asset_url}}",
+    callback: function() {
+      var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
+      ta.src = 'https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=BQLHHJGQGATOS731DVL0';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ta, s);
+    }
+  });
+
+  // Google Optimize
+  Theme.scripts.push({
+    src: "https://www.googleoptimize.com/optimize.js?id=OPT-P5SMZ6P"
+  })
+
+</script>
+
+{% include 'shopstorm-scripttags' %}
+{% include "trackify_x" %}

@@ -1,0 +1,50 @@
+<div class="SubscribeNews">
+  <div class="Container Container--narrower">
+    <h3>
+      <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+        <use href='#lamp'></use>
+      </svg>
+      Gift Ideas to Your Inbox
+    </h3>
+    <p><u>Get 10% off</u> when you sign up for our gift guide newsletter.</p>
+    {% comment %} <div class="Form__grid" data-grid="medium-2">
+      <div class="Form__input" data-grid-col="medium-1-2">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="Form__input" data-grid-col="medium-1-2">
+        <button class="Button" data-style="dark text" data-layout="noLayout">Join & Save</button>
+      </div>
+    </div> {% endcomment %}
+    {% if settings.klaviyo_link %}
+      <form action="{{ settings.klaviyo_link }}" method="post" class="klaviyo_styling klaviyo_standard_embed_{{settings.klaviyo_link}}" id="email_signup" target="_blank" novalidate="novalidate">
+        <input type="hidden" name="g" value="{{settings.klaviyo_link}}">
+        <input type="hidden" name="$fields" value="firstName,lastName"/>
+        <div class="input-group password__input-group klaviyo_field_group">
+          {% if section.settings.display_first_name %}
+          <input id="klaviyo_form_firstName" type="text" value="" class="firstName" name="firstName" placeholder="{{ 'general.newsletter_form.subscriber_first_name' | t }}">
+          {% endif %}
+          {% if section.settings.display_last_name %}
+          <input id="klaviyo_form_favorite_lastName" type="text" value="" name="lastName" placeholder="{{ 'general.newsletter_form.subscriber_last_name' | t }}">
+          {% endif %}
+          <input type="email" id="k_id_email" class="input-group__field contact_email newsletter__input" value="" name="EMAIL" class="contact_email" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}">
+          <span class="input-group__btn">
+            <button type="submit" class="btn newsletter__submit klaviyo_submit_button" name="subscribe" id="btnSubmit" value="{{ 'general.newsletter_form.submit' | t }}">
+              <span class="newsletter__submit-text--large">Join & Save</span>
+            </button>
+          </span>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+  <span class="deco"></span>
+</div>
+<footer class="Footer">
+  <div class="Container">
+    {% section 'footer-navigation' %}
+    <div class="social">
+      {% render 'nav-social.liquid' %}
+      <div id="reviewBadgeWidget"><div id="reviewBadgeWidgetInner" class="stjr-widget"></div></div>
+      <p class="copyright">©2020 Family Gifts Co.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,90 @@
+<section class="Buzz">
+  <div class="Container">
+
+    <header>
+      <h4>{{ section.settings.title }}</h4>
+      <div class="Buttons">
+        <button
+          class="Button"
+          data-style="white outline"
+          data-layout="big"
+          data-action="{ type: 'Modal', target: 'product_reviews', action: 'toggle' }"
+          >More Reviews</button>
+      </div>
+    </header>
+
+    <div class="Buzz__testimonials">
+      <div class="Loop">
+        {% for block in section.blocks %}
+          <div class="Card" data-layout="vertical media-content">
+            <div class="Card__media">
+              <figure>
+                {% if block.settings.image %}
+                  <img
+                    data-src="{{ block.settings.image | img_url: '200x' }}"
+                    data-srcset="
+                      {{ block.settings.image | img_url: '200x' }} 200w,
+                      {{ block.settings.image | img_url: '400x' }} 400w,
+                      {{ block.settings.image | img_url: '800x' }} 800w"
+                    data-sizes="auto"
+                    class="lazyload fadeup"
+                    />
+                {% endif %}
+              </figure>
+            </div>
+            <div class="Card__content">
+              <h6>{{ block.settings.name }}</h6>
+              <p>{{ block.settings.testimonial }}</p>
+              <div class="Badge Badge--verified">
+                <span class="icon"></span>
+                <span>Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Product Reviews",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "label": "Image",
+          "id": "image",
+          "type": "image_picker"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "testimonial",
+          "label": "Testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

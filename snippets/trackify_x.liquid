@@ -1,0 +1,59 @@
+<!-- RedRetarget App Hook start -->
+<link rel="dns-prefetch" href="https://trackifyx.redretarget.com">
+
+<!--OLD HOOK JS-->
+{% if template contains "product" %}
+<meta name="tkfy:tags" content="{% for tag in product.tags %}{{ tag | strip_html }}, {% endfor %}">
+<meta name="tkfy:collections" content="{% for collection in product.collections %}{{ collection.title }}, {% endfor %}">
+{% endif %}
+
+{% if template contains "cart" %}
+<meta name="tkfy:tags" content="{``:``{% for line_item in cart.items %}, `{{line_item.product.id}}`: [``{% for tag in line_item.product.tags %},`{{ tag | replace: '"', '\"' | escape }}`{% endfor %}]{% endfor %} }">
+<meta name="tkfy:collections" content="{``:``{% for line_item in cart.items %}, `{{line_item.product.id}}`: [``{% for collection in line_item.product.collections %},`{{ collection.title | replace: '"', '\"' | escape }}`{% endfor %}]{% endfor %} }">
+{% endif %}
+
+{% if template contains "collection" %}
+<meta name="tkfy:collections" content="{{ collection.title }}">
+{% endif %}
+<!-- END OLD HOOK JS-->
+
+<!-- HOOK JS-->
+{% if template contains "product" %}
+<meta name="tfx:tags" content="{% for tag in product.tags %} {{ tag | strip_html }}, {% endfor %}">
+<meta name="tfx:collections" content="{% for collection in product.collections %}{{ collection.title }}, {% endfor %}">
+{% endif %}
+
+{% if template contains "cart" %}
+<meta name="tfx:tags" content="{% for line_item in cart.items %}{% for tag in line_item.product.tags %}{{ tag | strip_html }}, {% endfor %}{% endfor %}">
+<meta name="tfx:collections" content="{% for line_item in cart.items %}{% for collection in line_item.product.collections %}{{ collection.title }}, {% endfor %}{% endfor %}">
+{% endif %}
+
+{% if template contains "collection" %}
+<meta name="tfx:collections" content="{{ collection.title }}">
+{% endif %}
+
+{% if cart %}
+<script id="tfx-cart">
+    {% assign carttData = cart | json %}
+    window.tfxCart = {{ carttData }}
+</script>
+{% endif %}
+
+{% if product %}
+<script id="tfx-product">
+    {% assign productData = product | json %}
+    window.tfxProduct = {{ productData }}
+</script>
+{% endif %}
+
+<!-- <script type="text/javascript">
+    /* ----- TFX Theme hook start ----- */
+    (function (t, r, k, f, y, x) {
+        if (t.tkfy != undefined) return true;
+        t.tkfy = true;
+        y = r.createElement(k); y.src = f; y.async = true;
+        x = r.getElementsByTagName(k)[0]; x.parentNode.insertBefore(y, x);
+    })(window, document, 'script', 'https://trackifyx.redretarget.com/pull/familygiftsco.myshopify.com/hook.js');
+    /* ----- TFX theme hook end ----- */
+</script>
+<!-- RedRetarget App Hook end -->

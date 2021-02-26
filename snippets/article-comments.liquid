@@ -1,0 +1,37 @@
+{% if blog.comments_enabled? %}
+  <section class="Section Article__comments">
+    <header class="Section__header">
+      <h2>{{ number_of_comments }} comments</h2>
+    </header>
+    <div class="Section__content">
+      {% paginate article.comments by 5 %}
+        {% for comment in article.comments %}
+          <div>
+            <div>{{ comment.content }}</div>
+            {{ comment.author }} @ {{ comment.created_at }}
+          </div>
+        {% endfor %}
+        {% if paginate.pages > 1 %}
+          {{ paginate | default_pagination }}
+        {% endif %}
+      {% endpaginate %}
+      <hr>
+      <div>
+        {% form 'new_comment', article %}
+          {{ form.errors | default_errors }}
+          <label for="CommentAuthor">name</label>
+          <input type="text" name="comment[author]" id="CommentAuthor" placeholder="name" value="{{ form.author }}" autocapitalize="words">
+
+          <label for="CommentEmail">email</label>
+          <input type="email" name="comment[email]" id="CommentEmail" placeholder="email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+
+          <label for="CommentBody">message</label>
+          <textarea name="comment[body]" id="CommentBody" placeholder="message">{{ form.body }}</textarea>
+
+          <input type="submit" value="post">
+        {% endform %}
+      </div>
+    </div>
+  </section>
+
+{% endif %}

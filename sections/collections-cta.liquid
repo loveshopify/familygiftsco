@@ -1,0 +1,35 @@
+{% if section.settings.enable_cta and section.settings.cta_link != blank and collection.handle != 'available-now' %}
+  {% if section.settings.title != blank %}
+    <h6 class="heading">{{section.settings.title}}</h6>
+  {% endif %}
+  <a class="Button" data-style="solid dark" href="{{section.settings.cta_link}}">{{section.settings.cta_text | default: "Shop Now"}}</a>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "CTA",
+    "class":"collections_cta",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_cta",
+        "label": "Enable CTA"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "Button Label"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "Button Link"
+      }
+    ]
+  }
+{% endschema %}

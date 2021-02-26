@@ -1,0 +1,56 @@
+
+{% comment %}
+Check if the product is on sale
+{% endcomment %}
+{% assign showPrice = showPrice | default: true %}
+{% assign showPreview = showPreview | default: true %}
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+	{% assign on_sale = true %}
+{% endif %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{% comment %} Split product title into part {% endcomment %}
+{%- assign titleParts = product.title | split: 'NO.' -%}
+{%- assign mainTitle = product.title | split: 'NO.' | first -%}
+{%- assign prodRef = product.title | split: 'NO.' | last -%}
+{%- assign baseTitle = mainTitle | split: ' - ' | first -%}
+{%- assign productColor = mainTitle | split: ' - ' | last -%}
+
+{%- capture classModifiers -%}
+  {%- unless product.available -%}
+    is-unavailable
+  {%- endunless -%}
+{%- endcapture -%}
+
+<div class="Card Card--product {{ product.type | handleize }} {{ classModifiers }}" data-layout="vertical media-content">
+  <figure class="Card__media">
+    <a href="{{ product.url | within: collection }}">
+      <img
+        data-sizes="auto"
+        data-src="{{ product.featured_image.src | img_url: '400x' }}"
+        data-srcset="
+            {{ product.featured_image.src | img_url: '400x' }} 400w,
+            {{ product.featured_image.src | img_url: '800x' }} 800w,
+            {{ product.featured_image.src | img_url: '1600x' }} 1600w"
+        class="lazyload fadeup mainImg"
+        alt="{{ product.title }}" />
+    </a>
+  </figure>
+  <div class="Card__details">
+    <h4 class="Card__title">
+      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+    </h4>
+    <div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+    {% if showPrice and product.available %}
+      {% render 'product-price', product: product %}
+    {% endif %}
+    {% if on_sale %}
+      {% render 'product-discount' product: product %}
+    {% endif %}
+    {%- unless product.available -%}
+      <div class="Badge">Sold Out</div>
+    {%- endunless -%}
+  </div>
+</div>

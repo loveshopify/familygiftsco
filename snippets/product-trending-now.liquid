@@ -1,0 +1,17 @@
+{%- assign collection = collections['trending-products'] -%}
+<hr>
+<section class="Section Section--trendingNow">
+  <header class="Section__header">
+    <h3>Trending <strong>Now</strong></h3>
+  </header>
+  <div class="Section__content">
+    <div class="Loop Loop--products">
+      {% for product in collection.products | limit: 10 %}
+        {%- comment %}<locksmith:cad9>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:cad9>{% endcomment -%}
+        {% render 'product-card' with product as product %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

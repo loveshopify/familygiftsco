@@ -1,0 +1,14 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{%- assign compare_at_price = current_variant.compare_at_price -%}
+{%- assign price = current_variant.price -%}
+{%- assign price_varies = product.price_varies -%}
+{%- assign available = current_variant.available -%}
+
+<div data-price-wrapper>
+  {% if compare_at_price > price %}
+    <span class="compare_price" data-compare-price>{{ compare_at_price | money }}</span>
+    <span class="new-price" data-product-price>{{ price | money }}</span>
+  {% else %}
+    <span class="price" data-product-price>{{ price | money }}</span>
+  {% endif %}
+</div>

@@ -1,0 +1,7 @@
+{% comment %} {% include 'customily-conditions' %} {% endcomment %}
+{% if settings.customily_enabled and customily_show %}
+  <div class="canvas-wrapper" style="display:none">
+    <div class="canvas-helper-info">Enter the names above to check the preview bellow:</div>
+    <canvas id="preview-canvas"></canvas>
+  </div>
+{% endif %}

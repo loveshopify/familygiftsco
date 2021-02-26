@@ -1,0 +1,57 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<div class="Container Container--narrow">
+  <header class="Section__header">
+    <h4>{{ section.settings.title }}</h4>
+    {% if collection.handle %}
+      <a href="/collections/{{ collection.handle }}" class="Button" data-style="outline navy" data-layout="small">Shop All</a>
+    {% endif %}
+  </header>
+  <div class="Section__content">
+    <div class="Loop Loop--products">
+      {% for product in collection.products limit: section.settings.products_limit %}
+        {%- comment %}<locksmith:888f>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:888f>{% endcomment -%}
+        {% render 'product-card' with product as product %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Collection",
+    "class": "Section Section--featuredCollection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "select",
+        "id": "products_limit",
+        "options": [
+            { "value": "4", "label": "4 Products"},
+            { "value": "8", "label": "8 Products"},
+            { "value": "16", "label": "16 Products"}
+        ],
+        "default": "4",
+        "label": "Product count"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection",
+        "category": "Store"
+      }
+    ]
+  }
+{% endschema %}

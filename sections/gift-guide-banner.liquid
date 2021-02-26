@@ -1,0 +1,157 @@
+{%- assign desktopImage = section.settings.image -%}
+{%- assign mobileImage = section.settings.image_for_mobile | default: section.settings.image -%}
+
+<div class="Section Section--giftGuideBanner">
+  <div class="Container">
+    <div class="main">
+      <div class="inner">
+        <h2>{{ section.settings.title }}</h2>
+        <p>{{ section.settings.intro }}</p>
+        {% comment %} <a href="#" class="Button" data-style="solid cream">View Gift Guide</a> {% endcomment %}
+      </div>
+      <figure>
+        {% if mobileImage %}
+          <img
+            data-src="{{ mobileImage | img_url: '200x' }}"
+            data-srcset="
+              {{ mobileImage | img_url: '200x' }} 200w,
+              {{ mobileImage | img_url: '400x' }} 400w,
+              {{ mobileImage | img_url: '800x' }} 800w,
+              {{ mobileImage | img_url: '1200x' }} 1200w
+            "
+            width="{{ mobileImage.width }}"
+            height="{{ mobileImage.height }}"
+            alt="{{ section.settings.title }}"
+            class="u-show--untilDesktop lazyload">
+        {% endif %}
+        {% if desktopImage %}
+          <img
+            data-src="{{ desktopImage | img_url: '200x' }}"
+            data-srcset="
+              {{ desktopImage | img_url: '400x' }} 400w,
+              {{ desktopImage | img_url: '1200x' }} 1200w,
+              {{ desktopImage | img_url: '1600x' }} 1600w,
+              {{ desktopImage | img_url: '2200x' }} 2200w
+            "
+            width="{{ desktopImage.width }}"
+            height="{{ desktopImage.height }}"
+            alt="{{ section.settings.title }}"
+            class="u-show--fromDesktop lazyload"
+          >
+        {% endif %}
+        <div class="deco bottom u-show--untilDesktop"></div>
+      </figure>
+      <div class="deco top"></div>
+      <div class="deco bottom"></div>
+    </div>
+    {% if section.blocks.size > 0 %}
+      <div class="loop-wrapper">
+        <div class="Loop Loop--tiles">
+          {% for block in section.blocks %}
+            <div
+              class="Tile lazyload"
+              data-bgset="{% include 'responsive-bg-image', image: block.settings.image %}"
+              >
+              <div class="Tile__details">
+                <h3>{{ block.settings.title }}</h3>
+                {% if block.settings.button_link %}
+                  <a href="{{ block.settings.button_link }}" class="Button" data-style="solid white" data-layout="small">{{ block.settings.button_label | default: 'Know More' }}</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swipe-indicator u-show--untilTablet">
+          <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+            <use href='#arrow-left'></use>
+          </svg>
+          <span>Swipe</span>
+          <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+            <use href='#arrow-right'></use>
+          </svg>
+        </div>
+      </div>
+    {% endif %}
+    {% render 'quality-highlights' %}
+  </div>
+  <span class="deco-left"></span>
+</div>
+
+
+{% schema %}
+{
+  "name": "Gift Guide Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_for_mobile",
+      "label": "Image for Mobile"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guide Banner",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

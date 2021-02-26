@@ -1,0 +1,23 @@
+<div class="Collection__navigation">
+  <div class="status">
+    <span class="results_count">Showing {{ collection.products_count }} Results</span>
+  </div>
+  <div class="options">
+    {% render 'collection-sort-control' %}
+  </div>
+</div>
+
+<div class="Collection__mobileNavigation">
+  <button
+    class="Button"
+    data-layout="small"
+    data-style="dark outline"
+    data-action="{ type: 'Drawer', target: 'collectionFilters', action: 'toggle' }"
+    >
+    <span>Filters</span>
+    <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+      <use href='#down2'></use>
+    </svg>
+    </button>
+  {% render 'collection-sort-control' %}
+</div>

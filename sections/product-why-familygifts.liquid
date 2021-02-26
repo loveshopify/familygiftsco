@@ -1,0 +1,87 @@
+{% if product.metafields.gwm.title[0] != blank %}
+  <div class="Container">
+    <header class="Section__header">
+      <h3>Why Family <strong>Gifts Co.</strong></h3>
+    </header>
+    <div class="Section__content">
+      {% for title in product.metafields.gwm.title %}
+        <div class="Panel" data-layout="{% cycle 'media-content', 'content-media' %}"">
+          <div class="Panel__media">
+            {%- assign image = product.metafields.gwm.image[forloop.index0] | first -%}
+            <img
+              data-src="{{ image.cloudinary_src | append: 'w_100' }}"
+              data-srcset="
+                {{ image.cloudinary_src | append: 'w_100' }} 100w,
+                {{ image.cloudinary_src | append: 'w_300' }} 300w,
+                {{ image.cloudinary_src | append: 'w_600' }} 600w
+              "
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              class="lazyload"
+              />
+          </div>
+          <div class="Panel__content">
+            <h3>{{ title }}</h3>
+            <div>{{ product.metafields.gwm.description[forloop.index0] }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <dl class="CollectionSpecs">
+      {% for title in collection.metafields.gwm.spec_title %}
+        {% assign value = collection.metafields.gwm.spec_value[forloop.index0] | split: "/" %}
+        <div class="CollectionSpecs__item">
+          <dt>{{ title }}</dt>
+          <dd>
+            {% if value.size > 1 %}
+              <div class="stat">
+                {{ value | first }}
+                <sup>/{{ value[1] }}</sup>
+              </div>
+            {% else %}
+              <div class="stat">{{ value }}</div>
+            {% endif %}
+          </dd>
+        </div>
+      {% endfor %}
+    </dl>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Why Family Gifts",
+  "class": "Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Why Family <strong>Gifts Co.</strong>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "label": "Image",
+          "id": "image",
+          "type": "image_picker"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

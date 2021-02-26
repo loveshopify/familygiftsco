@@ -1,0 +1,120 @@
+{% for tag in collection.all_tags %}
+  {% if tag contains 'Recipient:' %}
+    {%- assign hasRecipients = true -%}
+  {% endif %}
+  {% if tag contains 'Print:' %}
+    {%- assign hasPrints = true -%}
+  {% endif %}
+  {% if tag contains 'Collection:' %}
+    {%- assign hasCollections = true -%}
+  {% endif %}
+  {% if tag contains 'Orientation:' %}
+    {%- assign hasOrientation = true -%}
+  {% endif %}
+{% endfor %}
+
+
+<div class="Filters">
+  {% if hasPrints %}
+    <div class="Filters__group">
+      <h4>Type of Print</h4>
+      <div class="Nav Nav--vertical">
+        {% for tag in collection.all_tags %}
+          {% if tag contains "Print:" %}
+            {%- assign label = tag | remove: "Print: " -%}
+            {% if current_tags contains tag %}
+              <div class="Nav__item active">
+                {{ label | link_to_remove_tag: tag }}
+              </div>
+            {% else %}
+              <div class="Nav__item">
+                {{ label | link_to_add_tag: tag }}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if hasRecipients %}
+    <div class="Filters__group">
+      <h4>A Gift For</h4>
+      <div class="Nav Nav--vertical">
+        {% for tag in collection.all_tags %}
+          {% if tag contains "Recipient:" %}
+            {%- assign label = tag | remove: "Recipient: " -%}
+            {% if current_tags contains tag %}
+              <div class="Nav__item active">
+                {{ label | link_to_remove_tag: tag }}
+              </div>
+            {% else %}
+              <div class="Nav__item">
+                {{ label | link_to_add_tag: tag }}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if hasCollections %}
+    <div class="Filters__group">
+      <h4>By Collection</h4>
+      <div class="Nav Nav--vertical">
+        {% for tag in collection.all_tags %}
+          {% if tag contains "Collection:" %}
+            {%- assign label = tag | remove: "Collection: " -%}
+            {% if current_tags contains tag %}
+              <div class="Nav__item active">
+                {{ label | link_to_remove_tag: tag }}
+              </div>
+            {% else %}
+              <div class="Nav__item">
+                {{ label | link_to_add_tag: tag }}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if hasOrientation %}
+    <div class="Filters__group">
+      <h4>Orientation</h4>
+      <div class="Nav Nav--vertical">
+        {% for tag in collection.all_tags %}
+          {% if tag contains "Orientation:" %}
+            {%- assign label = tag | remove: "Orientation: " -%}
+            {% if current_tags contains tag %}
+              <div class="Nav__item active">
+                {{ label | link_to_remove_tag: tag }}
+              </div>
+            {% else %}
+              <div class="Nav__item">
+                {{ label | link_to_add_tag: tag }}
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if current_tags %}
+    <div class="Filters__reset">
+      <div{% unless current_tags %} class="active"{% endunless %}>
+      {% if collection.handle %}
+        <a href="/collections/{{ collection.handle }}{% if collection.sort_by %}?sort_by={{ collection.sort_by }}{% endif %}">View All</a>
+      {% elsif collection.current_type %}
+        <a a href="{{ collection.current_type | url_for_type | sort_by: collection.sort_by }}">View All</a>
+      {% elsif collection.current_vendor %}
+        <a href="{{ collection.current_vendor | url_for_vendor | sort_by: collection.sort_by }}">View All</a>
+      {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+</div>

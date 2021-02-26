@@ -1,0 +1,286 @@
+{
+  "current": {
+    "social-facebook-check": true,
+    "social-facebook": "https:\/\/www.facebook.com\/familygiftsco",
+    "social-twitter-check": false,
+    "social-twitter": "",
+    "social-pinterest-check": false,
+    "social-pinterest": "",
+    "social-instagram-check": true,
+    "social-instagram": "https:\/\/www.instagram.com\/familygiftsco\/",
+    "social-spotify-check": false,
+    "social-spotify": "",
+    "social-youtube-check": true,
+    "social-youtube": "https:\/\/www.youtube.com\/channel\/UCo1ACWvzAE9QuasuPL6oJQg",
+    "social-tumblr-check": false,
+    "social-tumblr": "",
+    "favicon": "shopify:\/\/shop_images\/Group.png",
+    "customily_enabled": true,
+    "customily_save_user_images": true,
+    "customily_enable_tag_is": false,
+    "customily_enable_tag": "",
+    "customily_disable_tag_is": false,
+    "customily_disable_tag": "",
+    "customily_touch_enable_tag_is": false,
+    "customily_touch_enable_tag": "",
+    "customily_hover_zoom": false,
+    "customily_hover_zoom_not_tag": "",
+    "customily_image_covers": true,
+    "customily_image_covers_not_tag": "",
+    "customily_save_device_info": true,
+    "disable_delivery_use_tag": false,
+    "disable_timer_regular_price": true,
+    "disable_timer_use_tag": true,
+    "enable_timer_stg": "enable_timer_custom_time_revise",
+    "enable_timer_reset_every_day": "19:00:00",
+    "enable_timer_stg_custom": 1500,
+    "enable_inventory_stock_number": "enable_stock_number_random",
+    "pt_show_refine": false,
+    "pt_show_collection_count": false,
+    "pt_show_inactive_filters": true,
+    "pt_show_checkboxes": false,
+    "pt_mobile_enable": false,
+    "klaviyo_link": "https:\/\/manage.kmail-lists.com\/subscriptions\/subscribe?a=M5XpEH&g=Ku3HfK",
+    "show_gift_card_stats": false,
+    "developer_mode": false,
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/FGC_logo_FINAL.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "small",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#20395b",
+    "checkout_button_color": "#de0d36",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "announcement": {
+        "type": "announcement",
+        "settings": {
+          "show_announcement": false,
+          "message_text": "Announce something here"
+        }
+      },
+      "site-header": {
+        "type": "site-header",
+        "blocks": {
+          "1601558280087": {
+            "type": "menu-tout",
+            "settings": {
+              "menu_item": "Wall Art",
+              "image": "shopify:\/\/shop_images\/Bitmap_copy_8fad7f7d-4544-4987-a243-07aab1b13537.jpg",
+              "title": "Best Sellers",
+              "intro": "<p>A brief two-liner about Best Sellers could go in this space right here. Keep it short and sweet.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "1601558280087"
+        ],
+        "settings": {
+          "menu": "main-menu-2020",
+          "menu_bestsellers": "best-sellers-for-mobile",
+          "menu_quicklinks": "mobile-quick-links"
+        }
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/iStock-1196382664-2_3d6eed55-1340-40bc-a9e5-5cc0467ba8d9.jpg",
+          "content_placement": "center",
+          "title": "Custom Canvas Prints",
+          "intro": "",
+          "button_label": "Shop Custom Canvas Art",
+          "button_link": "shopify:\/\/collections\/hot-sellers",
+          "badge_product": "ocean-dock-multi-name-premium-canvas-template",
+          "badge_x": 60,
+          "badge_y": 14
+        }
+      },
+      "footer-navigation": {
+        "type": "footer-navigation",
+        "settings": {
+          "menu": "footer-menu"
+        }
+      },
+      "subscribe-modal": {
+        "type": "subscribe-modal",
+        "settings": {
+          "intro": "",
+          "mobile_image": "",
+          "desktop_image": ""
+        }
+      },
+      "1600162500309": {
+        "type": "gift-guide-banner",
+        "blocks": {
+          "1601477584200": {
+            "type": "tile",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/for-her.jpg",
+              "title": "Gifts for Her",
+              "button_label": "Shop for Her",
+              "button_link": "shopify:\/\/collections\/gifts-for-her"
+            }
+          },
+          "1601477683866": {
+            "type": "tile",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/for-him.jpg",
+              "title": "Gifts for Him",
+              "button_label": "Shop for Him",
+              "button_link": "shopify:\/\/collections\/gifts-for-him"
+            }
+          }
+        },
+        "block_order": [
+          "1601477584200",
+          "1601477683866"
+        ],
+        "settings": {
+          "image": "shopify:\/\/shop_images\/woman_canvas_adaf044c-fb34-4ef1-9d4b-582a6704532a.jpg",
+          "title": "About Our Premium Canvas Prints",
+          "intro": "<p>From glorious ocean sunsets to autumnal forests to classy black and white vistas, a gift from our canvas collection is so much more than just a pretty picture.<\/p><p>You can personalize the text of each custom print with the names of the people you love, meaning your family, friends, significant other, maybe even the dog! Can all see day and night, how much they mean to you. <\/p><p>Brighten up the house while brightening their smiles!<\/p>",
+          "button_label": "Learn More"
+        }
+      },
+      "1600164982235": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "Best <strong>Sellers<\/strong>",
+          "collection": "hot-sellers",
+          "products_limit": "4"
+        }
+      },
+      "1600179921770": {
+        "type": "featured-collections",
+        "blocks": {
+          "1600179951997": {
+            "type": "collection",
+            "settings": {
+              "collection": "personalized-wall-art",
+              "image": "shopify:\/\/shop_images\/iStock-1196382664-2.jpg",
+              "title": "Wall Art"
+            }
+          },
+          "1600179962899": {
+            "type": "collection",
+            "settings": {
+              "collection": "100-custom",
+              "image": "shopify:\/\/shop_images\/Bitmap.jpg",
+              "title": "100% Custom"
+            }
+          },
+          "1600179971955": {
+            "type": "collection",
+            "settings": {
+              "collection": "hot-sellers",
+              "image": "shopify:\/\/shop_images\/Bitmap_copy.jpg",
+              "title": ""
+            }
+          }
+        },
+        "block_order": [
+          "1600179951997",
+          "1600179962899",
+          "1600179971955"
+        ],
+        "settings": {
+          "title": "Discover the Perfect <strong>Gift<\/strong>"
+        }
+      },
+      "product-why-familygifts": {
+        "type": "product-why-familygifts",
+        "settings": {
+          "title": "Why Family <strong>Gifts Co.<\/strong>"
+        }
+      },
+      "product-main-layout": {
+        "type": "product-main-layout",
+        "settings": {
+          "buy_it_now_action": "direct_to_cart",
+          "show_saved_amount": true,
+          "enable_default_variant": false,
+          "show_quantity_selector": true,
+          "show_vendor": false,
+          "enable_zoom": true,
+          "shake_effect_enable": false,
+          "readmore_enable": false,
+          "enable_progressbar_text": true,
+          "enable_timer_top_message": true,
+          "enable_progressbartimer_text": false,
+          "enable_shipping": true,
+          "show_tags": false,
+          "show_social": true,
+          "enable_timer_stg_on": "enable_timer_stg_off",
+          "enable_payment_button": false,
+          "variant_swacth": "two",
+          "swatch_option": "with_background",
+          "color_style": "round_shape",
+          "product_review": true,
+          "visitor_counter_enable": true,
+          "visitor_counter_number": "1-15",
+          "show_del_time": true,
+          "delivery_time_number": "1-3",
+          "product_description": "under_the_price",
+          "enable_sticky": true,
+          "sticky_button": "show_timer",
+          "move_badges_under_cart": true,
+          "enable_trust_badges": true
+        }
+      },
+      "collections-cta": {
+        "type": "collections-cta",
+        "settings": {
+          "enable_cta": false,
+          "title": "",
+          "cta_text": ""
+        }
+      },
+      "gift-guide-banner": {
+        "type": "gift-guide-banner",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/woman_canvas_adaf044c-fb34-4ef1-9d4b-582a6704532a.jpg",
+          "image_for_mobile": "shopify:\/\/shop_images\/woman_canvas_adaf044c-fb34-4ef1-9d4b-582a6704532a.jpg",
+          "title": "About Our Premium Canvas Prints",
+          "intro": "<p>Our top-notch package is specifically designed for safe transport. If you order more than one canvas, each canvas will be shipped separately each with a tracking number to ensure safe delivery.<\/p>",
+          "button_label": "Learn More"
+        }
+      },
+      "160266347088621d05": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "What's <strong>New<\/strong>",
+          "collection": "new-products",
+          "products_limit": "4"
+        }
+      },
+      "1602663787ea58a2a3": {
+        "type": "featured-articles",
+        "settings": {
+          "title": "From the <strong>Blog<\/strong>",
+          "blogHandle": "news",
+          "articles_limit": "3"
+        }
+      },
+      "filter-menu-settings": {
+        "type": "filter-menu-settings",
+        "settings": {}
+      }
+    },
+    "content_for_index": [
+      "1600179921770",
+      "1600162500309",
+      "1600164982235",
+      "160266347088621d05",
+      "1602663787ea58a2a3"
+    ]
+  },
+  "presets": {
+    "Default": {}
+  }
+}

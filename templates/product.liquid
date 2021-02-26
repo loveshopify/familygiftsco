@@ -1,0 +1,87 @@
+
+<div
+  class="Product"
+  data-enable-history-state="true"
+  data-handle="{{ product.handle }}"
+  itemscope itemtype="http://schema.org/Product"
+  >
+
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+  {% if product.metafields.loox.num_reviews %}
+    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+      <meta itemprop="ratingValue" content="{{ product.metafields.loox.avg_rating }}"/>
+      <meta itemprop="reviewCount" content="{{ product.metafields.loox.num_reviews }}"/>
+    </div>
+  {% endif %}
+
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  <div class="Container">
+
+    {% include 'product-custombuilder' %}
+    {% section 'product-why-familygifts' %}
+    <div id="looxReviews" data-product-id="{{ product.id }}" class="loox-reviews-default">{{ product.metafields.loox.reviews }}</div>
+    {% render 'product-trending-now' %}
+
+  </div>
+
+  {% unless product == empty %}
+    <script type="application/json" data-product-json>
+      {{ product | json }}
+    </script>
+  {% endunless %}
+
+</div>
+
+<div class="Modal" data-layout="huge" data-component="Modal" data-identifier="product_reviews">
+  <div class="Modal__box">
+    <div class="Modal__content">
+      <div id="looxReviews" data-product-id="{{ product.id }}" class="loox-reviews-default"></div>
+    </div>
+    <button class="Button Button--icon close-modal" data-action="{ type: 'Modal', target: 'product_reviews', action: 'toggle' }">
+      <svg class='icon' height='1em' viewbox='0 0 20 20' width='1em'>
+        <use xlink:href='#close'></use>
+      </svg>
+    </button>
+  </div>
+  <span class="backdrop"></span>
+</div>
+
+
+<!--Start Klaviyo Viewed Product and Add to Cart tracking - DO NOT REMOVE! -->
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>
+
+<!--End Klaviyo Viewed Product and Add to Cart tracking - DO NOT REMOVE! -->

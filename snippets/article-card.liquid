@@ -1,0 +1,27 @@
+<div class="Card Card--article" data-layout="vertical media-content">
+  <figure class="Card__media">
+    <a href="{{ article.url }}">
+      <img
+        data-sizes="auto"
+        data-src="{{ article.image.src | img_url: '400x' }}"
+        data-srcset="
+            {{ article.image.src | img_url: '400x' }} 400w,
+            {{ article.image.src | img_url: '800x' }} 800w,
+            {{ article.image.src | img_url: '1600x' }} 1600w"
+        class="lazyload fadeup mainImg"
+        alt="{{ article.title }}" />
+    </a>
+  </figure>
+  <div class="Card__details">
+    <div class="Card__meta">
+      <small>{{ article.published_at | date: format: 'abbreviated_date' }}</small>
+    </div>
+    <h4 class="Card__title">
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h4>
+    <p>{{ article.excerpt_or_content | strip_html | truncate: 180 }}</p>
+    <div class="Card__cta">
+      <a href="{{ article.url }}" class="Button" data-style="red text">Keep reading</a>
+    </div>
+  </div>
+</div>

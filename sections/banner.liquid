@@ -1,0 +1,39 @@
+<div class="Container">
+  <div class="icon">icon</div>
+  <h2>{{ section.settings.title }}</h2>
+  <a href="{{ section.settings.button_link }}" class="Button" data-style="solid cream">{{ section.settings.button_label }}</a>
+</div>
+{% schema %}
+  {
+    "name": "Quiz Banner",
+    "class": "Banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button Label",
+        "default": "Learn More"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Quiz Banner",
+        "category": "Promotional"
+      }
+    ]
+  }
+{% endschema %}

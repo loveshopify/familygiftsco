@@ -1,0 +1,33 @@
+<div class="Main">
+  {% section 'site-banner' %}
+  <div class="Main__header">
+    <h1>Blog</h1>
+    {% comment %} <form method="get" action="/search" class="QuickSearch">
+      <input class="searchBox field" type="text" name="q"{% if search.performed %} value="{{ search.terms | escape | downcase }}"{% endif %} />
+      <input type="hidden" name="type" value="article" />
+      <button type="submit" class="Button" data-layout="noLayout">
+        <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+          <use xlink:href='#search2'></use>
+        </svg>
+      </button>
+    </form> {% endcomment %}
+  </div>
+  <div class="Container">
+    {% paginate blog.articles by 15 %}
+
+    <div class="Loop Loop--blog">
+      {% for article in blog.articles %}
+        {% render 'article-card' with article as article %}
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <div class="Nav Nav--pagination">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endif %}
+
+    {% endpaginate %}
+  </div>
+</div>
+

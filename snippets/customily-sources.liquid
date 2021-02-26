@@ -1,0 +1,29 @@
+{% include 'customily-conditions' %}
+{% if settings.customily_enabled and customily_show %}
+  <script>
+    window.customily = {
+      engraverOptions: { /* if you know what youre doing */ },
+      accordion_sets: false,
+      hover_zoom: {{ customily_hover_zoom }},
+      exportFile: true,
+      saveUserImages: {{ settings.customily_save_user_images }},
+      uploaded_image_covers: {{ customily_image_covers }},
+      collapsibleOptions: false,
+      cart_btn_anim: true
+    }
+    window.customily.pdomain = '{{ shop.permanent_domain }}';
+
+    /*
+    Theme.scripts.push({
+      src: 'https://cdn.customily.com/customily.js',
+    })
+    Theme.scripts.push({
+      src: 'https://cdn.customily.com/clientSpecific/customily.shopify.frontend.js'
+    })
+    */
+  </script>
+
+  <script src="https://cdn.customily.com/customily.js"></script>
+  <link rel="stylesheet" href="https://cdn.customily.com/clientSpecific/customily.shopify.frontend.css" media="print" onload="this.media='all'">
+  <script src="https://cdn.customily.com/clientSpecific/customily.shopify.frontend.js"></script>
+{% endif %}

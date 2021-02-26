@@ -1,0 +1,39 @@
+<div class="cart-totals">
+  {% if total_saving %}
+    {% assign x = total_saving | plus: 0  %}
+    {% assign y = x | plus: cart.total_price | plus: 0  %}
+    {% assign sale = total_saving | times: 100.0  %}
+    {% assign sale = sale | divided_by:  y | round %}
+  {% endif %}
+  <h4>{{ 'cart.general.subtotal' | t }}</h4>
+  <div
+    data-component="CartTotal"
+    data-initialValue="{{ cart.total_price }}"
+    data-originalValue="{{ original_value }}"
+    data-initialDiscount="{{ sale }}"
+  ></div>
+  {% if settings.show_gift_card_stats %}
+    <div
+      data-component="GiftCardTotals"
+      data-cart-total="{{ cart.total_price }}"
+    ></div>
+  {% endif %}
+  {% comment %} {% if cart.total_discounts > 0 %}
+    <p class="discounts">{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+  {% endif %} {% endcomment %}
+
+  <div class="cart-expires">
+    <span>This cart will expire in</span>
+    <div data-component="Countdown" data-expires="5000"></div>
+  </div>
+</div>
+
+<div class="Nav cart-navigation">
+  <div class="Nav__item no-js">
+    <button type="submit" name="update" class="Button" data-style="dark outline">{{ 'cart.general.update' | t }}</button>
+  </div>
+  <div class="Nav__item">
+    <button type="submit" class="Button" data-style="solid red" data-layout="big" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+  </div>
+</div>
+<small class="shipping-note">{{ 'cart.general.shipping_at_checkout' | t }}</small>

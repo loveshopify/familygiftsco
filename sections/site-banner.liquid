@@ -1,0 +1,34 @@
+<div data-component="MainBanner"></div>
+<script type="application/json" data-banner-contents>
+  {
+    "blocks": [
+      {% for block in section.blocks %}
+        {
+          "type": "{{block.type}}",
+          "content": {{ block.settings | json }}
+        } {% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Site Banner",
+  "class": "Main__banner",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "label": "Image",
+          "id": "image",
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

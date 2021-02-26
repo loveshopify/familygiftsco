@@ -1,0 +1,11 @@
+{% if settings.customily_enabled %}
+
+  {% assign custom_img = '' %}
+  {% for p in item.properties %}
+    {% if p.first contains '_custom-thumb' %}
+      {% assign custom_img = p %}
+	  {% break %}
+    {% endif %}
+  {% endfor %}
+
+{% endif %}

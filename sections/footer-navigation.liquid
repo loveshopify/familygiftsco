@@ -1,0 +1,16 @@
+<div class="Nav Nav--footer" role="navigation">
+  {% include "menu-options" links: linklists[section.settings.menu].links %}
+</div>
+
+{% schema %}
+{
+  "name": "Site Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer Menu"
+    }
+  ]
+}
+{% endschema %}

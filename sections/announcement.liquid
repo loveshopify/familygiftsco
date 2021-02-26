@@ -1,0 +1,39 @@
+{%- capture announcement -%}
+  {% if section.settings.message_link %}
+    <a href="{{ section.settings.message_link }}">
+  {% endif %}
+  {{ section.settings.message_text }}
+  {% if section.settings.message_link %}
+    </a>
+  {% endif %}
+{%- endcapture -%}
+{% if section.settings.show_announcement %}
+  <div class="Announcement">
+    <div class="Container">{{ announcement }}</div>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "Announcement",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "message_text",
+      "label": "Announcement text",
+      "default": "Announce something here"
+    },
+    {
+      "type": "url",
+      "id": "message_link",
+      "label": "Announcement link",
+      "info": "Optional"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,152 @@
+{%- assign desktopImage = section.settings.image -%}
+{%- assign mobileImage = section.settings.image_for_mobile | default: section.settings.image -%}
+
+<div class="Hero">
+  <div class="Hero__content">
+    <div class="inner">
+      <h1>{{ section.settings.title }}</h1>
+      <p>{{ section.settings.intro }}</p>
+      {% if section.settings.button_link != blank %}
+        <div class="Buttons">
+          <a href="{{ section.settings.button_link }}" class="Button" data-style="solid red">{{ section.settings.button_label }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="Hero__media">
+    {% if mobileImage %}
+      <img
+        data-src="{{ mobileImage | img_url: '200x' }}"
+        data-srcset="
+          {{ mobileImage | img_url: '200x' }} 200w,
+          {{ mobileImage | img_url: '400x' }} 400w,
+          {{ mobileImage | img_url: '800x' }} 800w,
+          {{ mobileImage | img_url: '1200x' }} 1200w
+        "
+        width="{{ mobileImage.width }}"
+        height="{{ mobileImage.height }}"
+        alt="{{ section.settings.title }}"
+        class="u-show--untilDesktop lazyload">
+    {% endif %}
+    {% if desktopImage %}
+      <img
+        data-src="{{ desktopImage | img_url: '200x' }}"
+        data-srcset="
+          {{ desktopImage | img_url: '400x' }} 400w,
+          {{ desktopImage | img_url: '1200x' }} 1200w,
+          {{ desktopImage | img_url: '1600x' }} 1600w,
+          {{ desktopImage | img_url: '2200x' }} 2200w
+        "
+        width="{{ desktopImage.width }}"
+        height="{{ desktopImage.height }}"
+        alt="{{ section.settings.title }}"
+        class="u-show--fromDesktop lazyload"
+      >
+    {% endif %}
+    {%- assign product = all_products[section.settings.badge_product] -%}
+    {% if product.available %}
+      <div class="Hero__productBadge" style="top: {{ section.settings.badge_y }}%; left: {{ section.settings.badge_x }}%;">
+        <h4>
+          <a href="{{ product.url }}">{{ product.title }}</a>
+        </h4>
+        <div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+        <a href="{{ product.url }}" class="Button" data-style="text">Shop Now</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_for_mobile",
+      "label": "Image for Mobile"
+    },
+    {
+      "type":      "select",
+      "id":        "content_placement",
+      "label":     "Content Placement",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default":   "right",
+      "info":      "Determines the position of the hero content for Desktop sized screens"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Badge",
+      "info": "Manages product to be higlighted in the form of a badge imposed over the main image"
+    },
+    {
+      "type":      "product",
+      "id":        "badge_product",
+      "label":     "Product"
+    },
+    {
+      "type":      "range",
+      "id":        "badge_x",
+      "min":       10,
+      "max":        80,
+      "step":       1,
+      "unit":       "%",
+      "label":     "Horizontal Positioning",
+      "default":   60
+    },
+    {
+      "type":      "range",
+      "id":        "badge_y",
+      "min":       10,
+      "max":        80,
+      "step":       1,
+      "unit":       "%",
+      "label":     "Vertical Positioning",
+      "default":   30
+    }
+  ]
+}
+{% endschema %}

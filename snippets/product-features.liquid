@@ -1,0 +1,19 @@
+{% comment %}
+MOVED to product-stock-warning.liquid
+{% unless section.settings.show_quantity_selector and section.settings.enable_payment_button %}
+  {% if section.settings.enable_progressbar_text  or  section.settings.enable_timer_top_message %}
+    {% include 'product-features-progressbar' %}
+  {% endif %}
+{% endunless %} {% endcomment %}
+
+
+{% comment %} {% if section.settings.enable_timer_stg_on == 'enable_timer_stg_on' and template == 'product' %}
+  Sale Ends In:
+  {% if current_variant.compare_at_price > current_variant.price %}
+  	{% include 'product-features-timer' %}
+  {% else %}
+    {% unless settings.disable_timer_regular_price %}
+    	{% include 'product-features-timer' %}
+    {% endunless %}
+  {% endif %}
+{% endif %} {% endcomment %}

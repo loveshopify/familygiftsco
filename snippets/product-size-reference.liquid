@@ -1,0 +1,123 @@
+{%- assign referenceCollection = collections[product.metafields.sizeguide.reference_collection] -%}
+<div class="Modal js-sliderController js-videoController" data-layout="huge noFrame" data-component="Modal" data-identifier="size_chart">
+  <div class="Modal__box">
+    <div class="Modal__content">
+      <div class="SizeGuide">
+        <div class="SizeGuide__figure">
+          <div
+            class="MediaPlayer"
+            data-component="MediaPlayer"
+            data-video="{{ referenceCollection.metafields.size_guide.video }}"></div>
+        </div>
+        <div class="SizeGuide__details">
+          <h6>Size Guide</h6>
+          <h2>{{ product.title }}</h2>
+          {% if product.metafields.sizeguide.description != blank %}
+            <p>{{ product.metafields.sizeguide.description }}</p>
+          {% endif %}
+          <dl class="Measurements" data-style="primary">
+            <div>
+              <dt>W</dt>
+              <dd>{{ referenceCollection.metafields.sizeguide.width }}"</dd>
+            </div>
+            <div>
+              <dt>H</dt>
+              <dd>{{ referenceCollection.metafields.sizeguide.height }}"</dd>
+            </div>
+            <div>
+              <dt>D</dt>
+              <dd>{{ referenceCollection.metafields.sizeguide.depth }}"</dd>
+            </div>
+          </dl>
+          <dl class="Measurements" data-style="secondary">
+            {% if referenceCollection.metafields.sizeguide.handle_drop != blank %}
+              <div>
+                <dt>Handle Drop</dt>
+                <dd>{{ referenceCollection.metafields.sizeguide.handle_drop }}"</dd>
+              </div>
+            {% endif %}
+            {% if referenceCollection.metafields.sizeguide.shoulder_straps != blank %}
+              <div>
+                <dt>Shoulder Straps</dt>
+                <dd>{{ referenceCollection.metafields.sizeguide.shoulder_straps }}"</dd>
+              </div>
+            {% endif %}
+            {% if referenceCollection.metafields.sizeguide.cross_body_strap != blank %}
+              <div>
+                <dt>Cross Body Strap</dt>
+                <dd>{{ referenceCollection.metafields.sizeguide.cross_body_strap }}"</dd>
+              </div>
+            {% endif %}
+          </dl>
+        </div>
+        {% if referenceCollection.metafields.sizeguide.collections_to_compare[0] != blank %}
+          <div class="SizeGuide__otherBags">
+            <h6>Compare to other bags</h6>
+            <div
+              data-component="Slider"
+              data-options="{
+                cellSelector: 'figure',
+                customUI: true,
+                prevNextButtons: true,
+                pageDots: false,
+                wrapAround: false,
+                wheelControl: true
+              }"
+              >
+              {% for item in referenceCollection.metafields.sizeguide.collections_to_compare %}
+                {%- assign collection = collections[item] -%}
+                <figure>
+                  <div class="media">
+                    <a href="{{ collection.url }}">
+                    {% comment %} {{ collection.metafields.sizeguide.reference_image }} {% endcomment %}
+                      {% if collection.metafields.sizeguide.reference_image != blank %}
+                        {%- assign image = collection.metafields.sizeguide.reference_image | first -%}
+                        <img
+                          src="{{ image.cloudinary_src | append: 'w_100' }}"
+                          data-srcset="
+                            {{ image.cloudinary_src | append: 'w_100' }} 100w,
+                            {{ image.cloudinary_src | append: 'w_300' }} 300w,
+                            {{ image.cloudinary_src | append: 'w_600' }} 600w
+                          "
+                          loading="lazy"
+                          />
+                      {% endif %}
+                    </a>
+                  </div>
+                  <figcaption><a href="{{ collection.url }}">{{ collection.title }}</a></figcaption>
+                </figure>
+              {% endfor %}
+              {% comment %} {% for block in section.blocks %}
+                {%- assign collection = collections[block.settings.feature_collection] -%}
+                {%- assign imageRef = block.settings.image -%}
+                <figure>
+                  <div class="media">
+                    <a href="{{ collection.url }}">
+                      <img
+                        data-src="{{ imageRef | img_url: '100x' }}"
+                        data-srcset="
+                          {{ imageRef | img_url: '100x' }} 100w,
+                          {{ imageRef | img_url: '200x' }} 200w,
+                          {{ imageRef | img_url: '400x' }} 400w,
+                          {{ imageRef | img_url: '800x' }} 800w
+                        "
+                        data-sizes="auto"
+                        class="lazyload">
+                    </a>
+                  </div>
+                  <figcaption><a href="{{ collection.url }}">{{ block.settings.title | default: collection.title }}</a></figcaption>
+                </figure>
+              {% endfor %} {% endcomment %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <button class="Button Button--icon close-modal" data-action="{ type: 'Modal', target: 'size_chart', action: 'toggle' }">
+      <svg class='icon' height='1em' viewbox='0 0 20 20' width='1em'>
+        <use href='#close'></use>
+      </svg>
+    </button>
+  </div>
+  <span class="backdrop"></span>
+</div>

@@ -1,0 +1,65 @@
+{%- comment %}<locksmith:68ea>{% endcomment -%}
+  {%- if search.results %}{% paginate search.results by 12 %}{% assign locksmith_search__results_count = 0 %}{% for result in search.results %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: result, subject_parent: search, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif %}{% assign locksmith_search__results_count = locksmith_search__results_count | plus: 1 %}{% endfor %}{% endpaginate %}{% endif -%}
+{%- comment %}</locksmith:68ea>{% endcomment -%}
+
+<div class="Main__layout Container">
+  <div class="Main__header">
+    <h1>
+      {% if search.performed %}
+        {{ 'general.search.results_with_count' | t: terms: search.terms, count: locksmith_search__results_count }}
+      {% else %}
+        {{ 'general.search.title' | t }}
+      {% endif %}
+    </h1>
+    <form action="/search" method="get" role="search">
+      <input type="text" name="q" value="{{ search.terms | escape }}">
+      <button type="submit" class="Button">search</button>
+      <input type="hidden" name="type" value="product" />
+    </form>
+  </div>
+  <div class="Main__content" data-component="LazyLoader">
+    {% paginate search.results by 12 %}
+
+    {% if search.performed %}
+      {% if locksmith_search__results_count == 0 %}
+        <p class="no-results">{{ 'general.search.no_results_html' | t: terms:search.terms }}</p>
+      {% else %}
+        <h2 class="visually-hidden">{{ 'general.search.heading' | t: count:locksmith_search__results_count }}</h2>
+        <div class="Loop Loop--searchResults js-lazyload">
+          {% for item in search.results %}
+            {%- comment %}<locksmith:ed97>{% endcomment -%}
+              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: item, subject_parent: search, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+            {%- comment %}</locksmith:ed97>{% endcomment -%}
+            {% if item.object_type == 'product' %}
+              {% assign product = item %}
+              {% include 'product-card', showPrice: false %}
+            {% else %}
+              <div class="Card">
+                <div class="Card__details">
+                  <h4 class="Card__title"><a href="{{ item.url | within: collection }}">{{ item.title }}</a></h4>
+                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="Loop__nextPageNav"><button class="Button view-more-button" data-style="navy outline">Load More</button></div>
+
+        <div class="js-pageNav">
+          {% if paginate.next.url %}
+            <a href="{{ paginate.next.url }}" class="nextPageLink"></a>
+          {% endif %}
+        </div>
+
+        <div class="page-load-status">
+          <p class="infinite-scroll-request">Loading...</p>
+          <p class="infinite-scroll-last">No more results.</p>
+          <p class="infinite-scroll-error"></p>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% endpaginate %}
+  </div>
+</div>

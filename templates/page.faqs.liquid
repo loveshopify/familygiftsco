@@ -1,0 +1,38 @@
+<div class="Main__layout Container Container--narrow" data-layout="full">
+  <header class="Main__header">
+    <h1>{{ page.title }}</h1>
+  </header>
+  <main class="Main__content">
+    {{ page.content | split: "<h4" | first }}
+    <div class="Loop Loop--faqs">
+        {% if page.content %}
+            {% assign description_parts = page.content | split: "<h4" %}
+            {% for part in description_parts %}
+                {% assign fp = part | append: " " | split: "</h4>" | last %}
+                {% assign p = part | append: " " | split: "</h4>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines %}
+                {% if part contains "</h4>" %}
+                    {% if p != "" or fp contains "<img " or fp contains "<iframe " %}
+                        <section class="Entry Entry--faq Collapse" data-component="Collapse">
+                            {% assign remove = part | split: ">" | first | append: ">" %}
+                            <h4 class="Entry__title Collapse__toggle">
+                              <span>{{ part | split: "</h4>" | first | strip_html | replace: remove, "" }}</span>
+                              <svg viewBox='0 0 20 20' class='icon open' width='1em' height='1em'>
+                                <use href='#plus-square'></use>
+                              </svg>
+                              <svg viewBox='0 0 20 20' class='icon close' width='1em' height='1em'>
+                                <use href='#minus-square'></use>
+                              </svg>
+                            </h4>
+                            <div class="Entry__details Collapse__content">
+                              <div class="inner">
+                                {{ part | split: "</h4>" | last | replace: "<div", "<span" | replace: "</div", "</span" }}
+                              </div>
+                            </div>
+                        </section>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+  </main>
+</div>

@@ -1,0 +1,35 @@
+{% paginate collection.products by per_page | default: 12 %}
+
+  <div data-component="LazyLoader">
+
+    <div
+      class="Loop Loop--products js-lazyload"
+      >
+      {% for product in collection.products %}
+        {%- comment %}<locksmith:4307>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:4307>{% endcomment -%}
+        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: product, subject_parent: collection, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {% render 'product-card' with product as product %}
+      {% endfor %}
+    </div>
+
+    <div class="js-pageNav">
+        {% if paginate.next.url %}
+            <a href="{{ paginate.next.url }}" class="nextPageLink"></a>
+        {% endif %}
+    </div>
+    {% if paginate.next.url %}
+      <div class="Loop__nextPageNav"><button class="Button view-more-button" data-style="navy outline">Load More</button></div>
+    {% endif %}
+    <div class="page-load-status">
+      <p class="infinite-scroll-request">Loading...</p>
+      <div class="infinite-scroll-last">{% section 'collections-cta' %}</div>
+      <p class="infinite-scroll-error"></p>
+    </div>
+
+  </div>
+  {% if paginate.next.url == blank %}
+    {% section 'collections-cta' %}
+  {% endif %}
+{% endpaginate %}

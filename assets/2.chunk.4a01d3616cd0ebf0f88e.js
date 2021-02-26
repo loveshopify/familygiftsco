@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{246:function(n,t,i){},53:function(n,t,i){"use strict";i.r(t);var e=i(12),u=i.n(e),c=i(20),o=i.n(c),s=i(8),f=(i(246),function(){function n(t,i){u()(this,n),this.ctx=i,this.el=t}return o()(n,[{key:"init",value:function(n){}},{key:"bindEvents",value:function(){}}]),n}());t.default=Object(s.a)((function(n,t){new f(n,t)}))}}]);
+//# sourceMappingURL=2.chunk.4a01d3616cd0ebf0f88e.js.map

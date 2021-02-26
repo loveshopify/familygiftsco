@@ -1,0 +1,80 @@
+
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count %}
+{% endif %}
+
+<div class="Main">
+  <div class="Main__content Container Container--narrow Article">
+    <div class="Article__header">
+      {% include 'nav-breadcrumbs' %}
+      <h1>{{ article.title }}</h1>
+      <p class="meta">{{ article.created_at | date: "%b %d, %Y" }}</p>
+    </div>
+
+    {% if article.image %}
+      <div class="Article__cover">
+        <div class="cover-wrapper">
+            <div class="main-image">
+              <img
+                  data-sizes="auto"
+                  data-src="{{ article.image.src | img_url: '200x' }}"
+                  data-srcset="
+                      {{ article.image.src | img_url: '200x' }} 200w,
+                      {{ article.image.src | img_url: '400x' }} 400w,
+                      {{ article.image.src | img_url: '800x' }} 800w,
+                      {{ article.image.src | img_url: '1600x' }} 1600w"
+                  class="lazyload fadeup"
+                  width="{{ article.image.width }}"
+                  height="{{ article.image.height }}"
+                  alt="{{ product.title }}" />
+            </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="Article__details">
+      <div class="Article__body">{{ article.content }}</div>
+      {% comment %} {% include 'article-comments' %} {% endcomment %}
+    </div>
+
+    {% comment %} <div class="Article__sequentialNav">
+      {% if blog.next_article %}
+        <a href="{{ blog.next_article }}" class="btn next">
+          <div class="info">{{ blog.next_article.title }}</div>
+          {% if blog.next_article.image %}
+            <figure
+              class="lazyload"
+              data-bgset="{% include 'responsive-bg-image', image: blog.next_article.image.src %}"
+              >
+            </figure>
+          {% endif %}
+          <div class="icon-wrapper">
+            <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+              <use xlink:href='#left'></use>
+            </svg>
+          </div>
+        </a>
+      {% endif %}
+      {% if blog.previous_article %}
+        <a href="{{ blog.previous_article }}" class="btn prev">
+          <div class="icon-wrapper">
+            <svg viewBox='0 0 20 20' class='icon' width='1em' height='1em'>
+              <use xlink:href='#right'></use>
+            </svg>
+          </div>
+          <div class="info">{{ blog.previous_article.title }}</div>
+          {% if blog.previous_article.image %}
+            <figure
+              class="lazyload"
+              data-bgset="{% include 'responsive-bg-image', image: blog.previous_article.image.src %}"
+              >
+            </figure>
+          {% endif %}
+        </a>
+      {% endif %}
+    </div> {% endcomment %}
+
+
+  </div>
+</div>
